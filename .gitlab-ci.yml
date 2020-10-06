@@ -63,9 +63,6 @@ test:unit:
   artifacts:
     paths:
       - target/jacoco-ut/jacoco.xml
-    reports:
-      junit:
-        - target/surefire-reports/TEST-*.xml
 
 #
 # ----------------------------------------------------------------------
