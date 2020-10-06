@@ -59,13 +59,8 @@ build:
 
 test:unit:
   stage: test
-  script:	mvn $(MAVEN_OPTS) $(MAVEN_CLI_OPTS) -B -Dtest=*UnitTest* test
-  artifacts:
-    paths:
-      - target/jacoco-ut/jacoco.xml
-    reports:
-      junit:
-        - target/surefire-reports/TEST-*.xml
+  script: mvn $(MAVEN_OPTS) $(MAVEN_CLI_OPTS) -B -Dtest=*UnitTest* test
+
 
 
 #
