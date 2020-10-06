@@ -81,5 +81,3 @@ release:tagnpush:
 # finally, lets deploy!
 # gitlab deployments textbook example https://docs.gitlab.com/ee/ci/ssh_keys/
 
-deploy:prep:
-  extends: .prep
