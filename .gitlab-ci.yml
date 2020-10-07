@@ -41,13 +41,13 @@ build:
     paths:
       - target/*
 
-  #
-  # ----------------------------------------------------------------------
-  # IMAGE STAGE
-  #
+#
+# ----------------------------------------------------------------------
+# IMAGE STAGE
+#
 
-  # images:
-  # extends: .images
+image:
+ extends: .images
 
 #
 # ----------------------------------------------------------------------
@@ -70,7 +70,7 @@ test:unit:
 
 # now, after the tests have passed, we'll prepare and release the final docker image
 # this is only done for the master branch!
-release:tagnpush:
+release:
   extends: .tagnpush
 
 #
