@@ -23,7 +23,7 @@ cache:
 
 stages:
   - build
-  - images
+  - image
   - test
   - release
 
