@@ -23,7 +23,7 @@ cache:
 
 stages:
   - build
-  - image
+  - images
   - test
   - release
 
@@ -46,7 +46,7 @@ build:
 # IMAGE STAGE
 #
 
-image:
+images:
   extends: .images
 
 #
