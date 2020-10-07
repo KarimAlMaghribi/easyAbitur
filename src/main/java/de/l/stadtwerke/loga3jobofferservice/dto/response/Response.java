@@ -20,7 +20,7 @@ public class Response <T> {
     private T payload;
     private Object errors;
     private Object metadata;
-
+/*
     public static <T> Response<T> badRequest() {
         Response<T> response = new Response<>();
         response.setStatus(Status.BAD_REQUEST);
@@ -83,9 +83,7 @@ public class Response <T> {
         setErrors(error);
     }
 
-    public enum Status {
-        OK, BAD_REQUEST, UNAUTHORIZED, VALIDATION_EXCEPTION, EXCEPTION, WRONG_CREDENTIALS, ACCESS_DENIED, NOT_FOUND, DUPLICATE_ENTITY
-    }
+
 
     @Getter
     @Accessors(chain = true)
@@ -103,5 +101,10 @@ public class Response <T> {
             this.totalPages = totalPages;
             this.number = number;
         }
+    }
+
+ */
+    public enum Status {
+        OK, BAD_REQUEST, UNAUTHORIZED, VALIDATION_EXCEPTION, EXCEPTION, WRONG_CREDENTIALS, ACCESS_DENIED, NOT_FOUND, DUPLICATE_ENTITY
     }
 }
