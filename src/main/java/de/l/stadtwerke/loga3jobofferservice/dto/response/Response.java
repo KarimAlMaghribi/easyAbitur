@@ -20,6 +20,25 @@ public class Response <T> {
     private T payload;
     private Object errors;
     private Object metadata;
+
+    public static <T> Response<T> notFound() {
+        Response<T> response = new Response<>();
+        response.setStatus(Status.NOT_FOUND);
+        return response;
+    }
+
+    public void addErrorMsgToResponse(String errorMsg, Exception ex) {
+        ResponseError error = new ResponseError()
+                .setDetails(errorMsg)
+                .setMessage(ex.getMessage())
+                .setTimestamp(DateUtils.today());
+        setErrors(error);
+    }
+    public static <T> Response<T> duplicateEntity() {
+        Response<T> response = new Response<>();
+        response.setStatus(Status.DUPLICATE_ENTITY);
+        return response;
+    }
 /*
     public static <T> Response<T> badRequest() {
         Response<T> response = new Response<>();
@@ -63,25 +82,11 @@ public class Response <T> {
         return response;
     }
 
-    public static <T> Response<T> notFound() {
-        Response<T> response = new Response<>();
-        response.setStatus(Status.NOT_FOUND);
-        return response;
-    }
 
-    public static <T> Response<T> duplicateEntity() {
-        Response<T> response = new Response<>();
-        response.setStatus(Status.DUPLICATE_ENTITY);
-        return response;
-    }
 
-    public void addErrorMsgToResponse(String errorMsg, Exception ex) {
-        ResponseError error = new ResponseError()
-                .setDetails(errorMsg)
-                .setMessage(ex.getMessage())
-                .setTimestamp(DateUtils.today());
-        setErrors(error);
-    }
+
+
+
 
 
 
