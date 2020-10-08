@@ -39,7 +39,7 @@ public class Response <T> {
         response.setStatus(Status.DUPLICATE_ENTITY);
         return response;
     }
-/*
+
     public static <T> Response<T> badRequest() {
         Response<T> response = new Response<>();
         response.setStatus(Status.BAD_REQUEST);
@@ -108,7 +108,6 @@ public class Response <T> {
         }
     }
 
- */
     public enum Status {
         OK, BAD_REQUEST, UNAUTHORIZED, VALIDATION_EXCEPTION, EXCEPTION, WRONG_CREDENTIALS, ACCESS_DENIED, NOT_FOUND, DUPLICATE_ENTITY
     }

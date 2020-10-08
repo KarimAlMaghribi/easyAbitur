@@ -11,7 +11,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.util.AssertionErrors;
 import org.springframework.web.client.HttpClientErrorException;
 
 @RunWith(SpringRunner.class)
@@ -38,6 +37,7 @@ public class EmployeeControllerIntegrationTest {
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
         ResponseEntity<String> response = restTemplate.exchange(getRootUrl() + "/employees",
                 HttpMethod.GET, entity, String.class);
+        System.out.println("Response: " + response);
         Assert.assertNotNull(response.getBody());
     }
 
