@@ -27,7 +27,7 @@ public class FileController {
     private StellenausschreibungRepository stellenausschreibungRepository;
 
 
-
+/*
     @PostMapping("/upload")
     public ResponseEntity<ResponseFileMessage> uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
@@ -41,7 +41,7 @@ public class FileController {
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseFileMessage(message));
         }
     }
-
+*/
     @GetMapping("/files")
     public ResponseEntity<List<ResponseFile>> getListFiles() {
         List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
