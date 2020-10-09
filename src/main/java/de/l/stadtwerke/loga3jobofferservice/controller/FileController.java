@@ -3,6 +3,7 @@ package de.l.stadtwerke.loga3jobofferservice.controller;
 import de.l.stadtwerke.loga3jobofferservice.dto.response.ResponseFile;
 import de.l.stadtwerke.loga3jobofferservice.dto.response.ResponseFileMessage;
 import de.l.stadtwerke.loga3jobofferservice.model.FileDB;
+import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
 import de.l.stadtwerke.loga3jobofferservice.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,11 +17,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v2")
+@RequestMapping("api/loga3-joboffer-service")
 public class FileController {
 
     @Autowired
     private FileStorageService storageService;
+
+    @Autowired
+    private StellenausschreibungRepository stellenausschreibungRepository;
+
+
 
     @PostMapping("/upload")
     public ResponseEntity<ResponseFileMessage> uploadFile(@RequestParam("file") MultipartFile file) {

@@ -18,18 +18,64 @@ Link zu Bewerbungsportal des jeweiligen BU
 *
 * */
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-import java.util.Set;
+import org.hibernate.annotations.GenericGenerator;
 
-@Getter
-@Setter
-@NoArgsConstructor
-//@Accessors(chain = true)
+
+import javax.persistence.*;
+
+
+@Entity
+@Table(name = "stellenausschreibung")
 public class Stellenausschreibung {
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    private Long id;
+
+    private String name;
+
+    private String type;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "pdf", nullable = false)
+    private FileDB pdf;
+
+    public Stellenausschreibung(long id, String name, String type) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
+
+    public Stellenausschreibung() {}
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    @Column(name = "name", nullable = false)
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "type", nullable = false)
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public FileDB getPdf() {return pdf;}
+    public void setPdf(FileDB pdf) {this.pdf = pdf;}
+
+
 }

@@ -1,10 +1,6 @@
 package de.l.stadtwerke.loga3jobofferservice.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,6 +15,11 @@ public class FileDB {
     private String name;
 
     private String type;
+
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "stellenausschreibung")
+    private Stellenausschreibung stellenausschreibung;
 
     @Lob
     private byte[] data;
