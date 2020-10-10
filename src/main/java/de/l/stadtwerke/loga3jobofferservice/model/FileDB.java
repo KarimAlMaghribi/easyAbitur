@@ -18,10 +18,8 @@ public class FileDB {
 
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,
-            mappedBy = "stellenausschreibung")
+            mappedBy = "pdf")
     private Stellenausschreibung stellenausschreibung;
-
-    @Lob
     private byte[] data;
 
     public FileDB() {

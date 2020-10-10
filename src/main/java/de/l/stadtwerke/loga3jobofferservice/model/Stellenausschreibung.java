@@ -1,62 +1,38 @@
 package de.l.stadtwerke.loga3jobofferservice.model;
 
-/*
-* Titel	Feld title
-Freitext (optional)	(Haken)
-Liste mit Aufgaben "Ihre Aufgaben"	(Haken)
-Angebote seitens des jeweiligen BU	(Fehler) (sind die ggf. nicht immer vorhanden?)
-Profil des Bewerbers - "
-Auf diese Aufgaben sind Sie gut vorbereitet, wenn Sie folgende Voraussetzungen
-
-erfüllen"
-
-(Haken)
-Footer des jeweiligen BU	(Fehler)
-Short Note "Gut zu wissen"	(Fehler) (sind die ggf. nicht immer vorhanden?)
-Ansprechpartner	(Haken) (schwer zu parsen)
-Link zu Bewerbungsportal des jeweiligen BU
-*
-* */
-
-
+import lombok.Builder;
 import org.hibernate.annotations.GenericGenerator;
 
 
 import javax.persistence.*;
+import java.io.File;
 
 
 @Entity
-@Table(name = "stellenausschreibung")
+@Table(name = "stellen")
 public class Stellenausschreibung {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private Long id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    private String id;
 
     private String name;
 
     private String type;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "pdf", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = true, cascade=CascadeType.ALL)
+    @JoinColumn(name = "files", nullable = true)
     private FileDB pdf;
 
-    public Stellenausschreibung(long id, String name, String type) {
-        this.id = id;
+    public Stellenausschreibung(String name, String type, FileDB pdf) {
         this.name = name;
         this.type = type;
+        this.pdf = pdf;
     }
 
     public Stellenausschreibung() {}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
+
 
     @Column(name = "name", nullable = false)
     public String getName() {
