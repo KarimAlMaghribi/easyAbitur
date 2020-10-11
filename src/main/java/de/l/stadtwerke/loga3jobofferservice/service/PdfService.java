@@ -42,7 +42,7 @@ public class PdfService {
         return stellenausschreibungRepository.save(stellenausschreibung);
     }
 
-    public File generatePdf() throws IOException, DocumentException {
+    public File generatePdf(String id) throws IOException, DocumentException {
         List<Stellenausschreibung> stelle = stellenausschreibungRepository.findAll();
         Context context = getContext(stelle.get(0));
         String html = loadAndFillTemplate(context);

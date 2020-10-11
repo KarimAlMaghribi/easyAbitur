@@ -16,17 +16,25 @@ public class Stellenausschreibung {
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    private String name;
+    private String jobbezeichnung;
 
-    private String type;
+    private String kategorie;
+
+    private String kontaktperson;
+
+    private String aufgaben;
+
 
     @OneToOne(fetch = FetchType.LAZY, optional = true, cascade=CascadeType.ALL)
     @JoinColumn(name = "files", nullable = true)
     private FileDB pdf;
 
-    public Stellenausschreibung(String name, String type, FileDB pdf) {
-        this.name = name;
-        this.type = type;
+    public Stellenausschreibung(String id, String jobbezeichnung, String kategorie, String kontaktperson, String aufgaben, FileDB pdf) {
+        this.id = id;
+        this.jobbezeichnung = jobbezeichnung;
+        this.kategorie = kategorie;
+        this.kontaktperson = kontaktperson;
+        this.aufgaben = aufgaben;
         this.pdf = pdf;
     }
 
@@ -34,20 +42,36 @@ public class Stellenausschreibung {
 
 
 
-    @Column(name = "name", nullable = false)
-    public String getName() {
-        return name;
+    @Column(name = "jobbezeichnung", nullable = false)
+    public String getJobbezeichnung() {
+        return jobbezeichnung;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setJobbezeichnung(String jobbezeichnung) {
+        this.jobbezeichnung = jobbezeichnung;
     }
 
-    @Column(name = "type", nullable = false)
-    public String getType() {
-        return type;
+    @Column(name = "kategorie", nullable = false)
+    public String getKategorie() {
+        return kategorie;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setKategorie(String type) {
+        this.kategorie = type;
+    }
+
+    @Column(name = "kontaktperson", nullable = false)
+    public String getKontaktperson() {
+        return kontaktperson;
+    }
+    public void setKontaktperson(String kontaktperson) {
+        this.kontaktperson = kontaktperson;
+    }
+
+    @Column(name = "aufgaben", nullable = false)
+    public String getAufgaben() {
+        return aufgaben;
+    }
+    public void setAufgaben(String aufgaben) {
+        this.aufgaben = aufgaben;
     }
 
     public FileDB getPdf() {return pdf;}

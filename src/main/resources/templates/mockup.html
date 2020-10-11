@@ -2,181 +2,77 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta name="keywords" content="" />
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="HandheldFriendly" content="True" />
-  <meta name="MobileOptimized" content="320" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
 
-  <title th:text="${name}"></title>
+    <title th:text="${name}"></title>
 
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="www.l.de/karriere/angebot/teamleiter-lager-m-w-d-_400" />
-  <meta property="og:title" content="Teamleiter Lager (m/w/d) " />
-  <meta property="og:description" content="Ihre Aufgaben
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="www.l.de/karriere/angebot/teamleiter-lager-m-w-d-_400"/>
+    <meta property="og:title" content="Teamleiter Lager (m/w/d) "/>
+    <meta property="og:description" content="Ihre Aufgaben
 
-Wahrnehmung der Führungsverantwortung entsprechend der Führun" />
-  <meta property="og:image" content="https://www.l.de/file/image/5092/e" />
+Wahrnehmung der Führungsverantwortung entsprechend der Führun"/>
+    <meta property="og:image" content="https://www.l.de/file/image/5092/e"/>
 
 
+    <link href="https://www.l.de/assets/images/favi.png" rel="shortcut icon"/>
 
-  <link href="https://www.l.de/assets/images/favi.png" rel="shortcut icon" />
-
-  <link rel="stylesheet" th:href="@{css/main.css}"/>
-  <link rel="stylesheet" th:href="@{css/jquery-ui.css}"/>
-  <link rel="stylesheet" type="text/css" href="@{css/ie10.css}" />
+    <link rel="stylesheet" th:href="@{css/main.css}"/>
+    <link rel="stylesheet" th:href="@{css/jquery-ui.css}"/>
+    <link rel="stylesheet" type="text/css" href="@{css/ie10.css}"/>
 
 </head>
 
 <body class="group-without-sidebar ">
-  <div id="maincontent" class="underlinelinks">
+<div id="maincontent" class="underlinelinks">
     <div class="fullwidth">
-      <div class="content">
-        <div class="staffing_showDetailSecond">
-          <div class="staff_detail">
-            <div class="detail-contain">
-              <br />
-              <br />
-              <h1 class="jobtitle" th:text="${name}"></h1>
-              <h2 class="text-black"></h2>
-            </div>
-            <div class="row contain_row">
-              <div class="grid-1-4 gridimgtext show-mobile-good-to-now">
-                <div class="text_show bordertext">
-                  <h3>Gut zu wissen</h3>
-                  <ul class="goodtoknow">
-                    <li>unbefristet
-                    </li>
-                    <li>Vollzeit, 38 h/Woche
-                    </li>
-                    <li>ab sofort in Leipzig
-                    </li>
-                    <li>Vergütung nach Tarifvertrag AVEU
-                    </li>
-                    <li>Bewerbung mit Angabe der Gehaltsvorstellung sowie frühestmöglichen Eintrittstermin
-                    </li>
-                    <li>Bewerbungsunterlagen berücksichtigen wir ausschließlich im pdf-Format </li>
+        <div class="content">
+            <div class="staffing_showDetailSecond">
+                <div class="staff_detail">
+                    <div class="row contain_row">
+                        <div class="grid-3-4">
+                            <div class="text_show padding_right">
+                                <h2>Job:</h2>
+                                <ul>
+                                    <li>
+                                        <td th:text="${stelle.jobbezeichnung}"></td>
+                                    </li>
+                                </ul>
 
-                  </ul>
-                </div>
-              </div>
-              <div class="grid-3-4">
-                <div class="text_show padding_right">
-                  <h2>Ihre Aufgaben <td th:text="${stelle.name}"></td></h2>
-                  <ul>
-                    <li>Wahrnehmung der Führungsverantwortung entsprechend der Führungsgrundsätze und -richtlinien,
-                      Durchführung von personellen Maßnahmen in Abstimmung mit dem Personalmanagement sowie
-                      Personalplanung und -auswahl entsprechend der Leitlinien der Führung und Zusammenarbeit,
-                      zielgerichtete Personalentwicklung und Sicherstellung einer zukunftsorientierten Weiterbildung der
-                      zugeordneten Mitarbeiter in Zusammenarbeit mit dem Personalmanagement, Wahrnehmung der
-                      Fürsorgepflicht zur Unfallverhütung für die zugeordneten Mitarbeiter</li>
-                    <li>
-                      <p>Organisation, Überwachung, Steuerung und Optimierung der teaminternen Prozess- und
-                        Arbeitsabläufe im Verantwortungsbereich sowie der Material- und Warenbewegungen, Einhaltung der
-                        Arbeitssicherheit, Sicherung des internen Qualitätsmanagements </p>
-                    </li>
-                    <li>Koordination und Überwachung von Bestandsführungen sowie Weiterentwicklung der Lagerbestände
-                      nach organisatorisch und wirtschaftlichen Kriterien</li>
-                    <li>Sicherstellung der Inventuren auf Grundlage des Handelsgesetzbuches, der Abgabenordnung und der
-                      Einkommenssteuerrichtlinie nach innerbetrieblichen Richtlinien</li>
-                    <li>Verantwortlich für Lösungen der zugewiesenen Entsorgungsaufgaben gemäß Umweltschutz</li>
-                  </ul>
-                </div>
-                <div class="text_show padding_right margin_top">
-                  <h2>Unser Angebot</h2>
-                  <ul>
-                    <li>regionaler Arbeitsort</li>
-                    <li>keine Überstunde geht verloren</li>
-                    <li>30 Tage Urlaub</li>
-                    <li>betriebliche Altersvorsorge</li>
-                    <li>Verpflegungszuschuss (z.B. Kantine, kostenfreier Kaffee)</li>
-                  </ul>
-                </div>
-                <div class="text_show padding_right margin_top">
-                  <h2>Ihr Profil</h2>
-                  <ul>
-                    <li>abgeschlossenes technisches oder betriebswirtschaftliches Bachelor-Studium mit Schwerpunkt
-                      Logistik oder einer vergleichbaren betriebswirtschaftlichen/ technischen Fachrichtung</li>
-                  </ul>
-                  <ul>
-                    <li>Mehrjährige Erfahrungen im Logistikbereich sowie Führungserfahrungen</li>
-                    <li>Kenntnisse im Wirtschafts- und Vertragsrecht, Abfall- und Entsorgungsrecht, Gefahrgutrecht nach
-                      ADR/RID und Gefahrstoffe</li>
-                    <li>Routiniert im Umgang mit MS Office und mit Logistiktechnik und -systemen, wie SAP-MM/WM, </li>
-                    <li>Analytische Fähigkeiten, unternehmerisches Denken und Handeln, Kommunikationsfähigkeit</li>
-                    <li>Team- und Kooperationsfähigkeit, Leistungsbereitschaft, Verantwortungsbewusstsein und
-                      Entscheidungsfähigkeit, Englischkenntnisse wünschenswert</li>
-                  </ul>
-                </div>
-                <div class="text_show padding_right margin_top">
-                  <p>Leipzigs Energiezukunft liegt uns am Herzen. Deshalb gehen wir bewusst neue Wege, um die
-                    Energiewende aktiv mitzugestalten. Mit neuen Ideen, Experten- wissen und viel Engagement sorgen
-                    unsere rund 1.200 Mitarbeiterinnen und Mitarbeiter dafür, dass Leipzig die Energie nicht ausgeht –
-                    heute nicht und auch nicht in Zukunft. Geben auch Sie Leipzig Energie. </p>
-                </div>
-              </div>
-              <div class="grid-1-4 gridimgtext">
-                <div class="text_show bordertext show-desktop-good-to-now">
-                  <h3>Gut zu wissen</h3>
-                  <ul class="goodtoknow">
-                    <li>unbefristet
-                    </li>
-                    <li>Vollzeit, <td th:text="${type}"></td> h/Woche
-                    </li>
-                    <li>ab sofort in Leipzig
-                    </li>
-                    <li>Vergütung nach Tarifvertrag AVEU
-                    </li>
-                    <li>Bewerbung mit Angabe der Gehaltsvorstellung sowie frühestmöglichen Eintrittstermin
-                    </li>
-                    <li>Bewerbungsunterlagen berücksichtigen wir ausschließlich im pdf-Format </li>
-
-                  </ul>
-                </div>
-                <div class="text_show">
-                  <div class="text_show">
-                    <p class="contact-info">Anja Schultz</p>
-                    <p class="contact-info"><a href="mailto:karriere.stadtwerke@l.de">karriere.stadtwerke@l.de</a></p>
-                    <p class="contact-empty-p"></p>
-                    <p class="contact-info">Leipziger Stadtwerke GmbH</p>
-                    <p class="contact-info">Postfach 10 06 14 </p>
-                    <p class="contact-info">04006 Leipzig</p>
-                    <p class="contact-empty-p"></p>
-                    <div class="contact-description">
-                      <h3>Willkommen im #TeamLeipziger!</h3>
+                                <h2>Ihre Aufgaben sind:</h2>
+                                <ul>
+                                    <li>
+                                        <td th:text="${stelle.aufgaben}"></td>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="text_show padding_right margin_top">
+                                <h2>Die Kategorie ist:</h2>
+                                <ul>
+                                    <li>
+                                        <td th:text="${stelle.kategorie}"></td>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="text_show padding_right margin_top">
+                                <h2>Bitte wenden Sie sich bei Fragen an:</h2>
+                                <ul>
+                                    <li>
+                                        <td th:text="${stelle.kontaktperson}"></td>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-            <br />
-            <br />
-            <br />
-          </div>
         </div>
-        <input type="hidden" value="true" name="hideValueTeaser" id="hideValueTeaser" />
-        <div id="teaser_content" class="teaser showRotation js-teaser">
-          <div class="image-wrapper js-image-wrapper">
-          </div>
-
-          <div class="teasertext contentwide">
-            <div class="absolute">
-              <div class="bg">
-                <div data-teaser-id="400" class="slogan-box">
-                  <ul>
-                    <li class="white">Willkommen im #TeamLeipziger</li>
-                    <li class="yellow">
-                      <p><strong>Fachkraft (m/w/d) als Energieträger </strong></p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 </body>
 
 </html>

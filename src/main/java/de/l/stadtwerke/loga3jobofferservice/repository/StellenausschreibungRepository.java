@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface StellenausschreibungRepository extends JpaRepository<Stellenausschreibung, String> {
-    //List<Stellenausschreibung> findByFileDBid(long fileDBid);
+    //Stellenausschreibung findByFileDBid(String fileDBid);
 }

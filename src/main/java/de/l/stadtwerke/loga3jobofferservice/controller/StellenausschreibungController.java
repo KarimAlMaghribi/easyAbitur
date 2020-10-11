@@ -1,11 +1,16 @@
 package de.l.stadtwerke.loga3jobofferservice.controller;
 
 import com.lowagie.text.DocumentException;
+import de.l.stadtwerke.loga3jobofferservice.model.FileDB;
 import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung;
+import de.l.stadtwerke.loga3jobofferservice.repository.FileDBRepository;
 import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
+import de.l.stadtwerke.loga3jobofferservice.service.FileStorageService;
 import de.l.stadtwerke.loga3jobofferservice.service.PdfService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +32,9 @@ public class StellenausschreibungController {
 
     @Autowired
     PdfService pdfService;
+
+    @Autowired
+    private FileStorageService storageService;
 
     @CrossOrigin(origins = "http://localhost:4200")
     @Transactional(readOnly=true)
@@ -54,6 +62,7 @@ public class StellenausschreibungController {
                 }).orElseThrow(() -> new NotFoundException(("Die Stellenausschreibung wurde nicht gefunden")));
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/stellen")
     public Stellenausschreibung setStellenausschreibungen( @RequestBody(required=false)  Stellenausschreibung stelle) throws IOException, DocumentException {
         return pdfService.generatePdfandSave(stelle);
@@ -61,19 +70,13 @@ public class StellenausschreibungController {
 
     @Transactional(readOnly=true)
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/download-pdf")
-    public void downloadPDFResource(HttpServletResponse response) {
-        try {
-            Path file = Paths.get(pdfService.generatePdf().getAbsolutePath());
-            if (Files.exists(file)) {
-                response.setContentType("application/pdf");
-                response.addHeader("Content-Disposition",
-                        "attachment; filename=" + file.getFileName());
-                Files.copy(file, response.getOutputStream());
-                response.getOutputStream().flush();
-            }
-        } catch (DocumentException | IOException ex) {
-            ex.printStackTrace();
-        }
+    @GetMapping("/download-pdf/{id}")
+    public ResponseEntity<byte[]> downloadPDFResource(HttpServletResponse response, @PathVariable String id) {
+
+        FileDB fileDB = storageService.getFile(id);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
+
     }
 }
