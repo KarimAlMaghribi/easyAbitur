@@ -1,9 +1,8 @@
 package de.l.stadtwerke.loga3jobofferservice.MapperTests;
 
-import de.l.stadtwerke.loga3jobofferservice.dto.StellenausschreibungDTO;
+import de.l.stadtwerke.loga3jobofferservice.dto.model.StellenausschreibungDTO;
 import de.l.stadtwerke.loga3jobofferservice.dto.mapper.StellenausschreibungMapper;
 import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung;
-import org.junit.Assert;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
 
