@@ -11,6 +11,8 @@ public class Stellenausschreibung {
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
+    private String stellenId;
+
     private String referenceNumber;
 
     private String title;
@@ -43,6 +45,7 @@ public class Stellenausschreibung {
     private FileDB pdf;
 
     public Stellenausschreibung(String id,
+                                String stellenId,
                                 String referenceNumber,
                                 String title,
                                 String url,
@@ -58,6 +61,7 @@ public class Stellenausschreibung {
                                 String section2,
                                 FileDB pdf) {
         this.id = id;
+        this.stellenId = stellenId;
         this.referenceNumber = referenceNumber;
         this.title = title;
         this.url = url;
@@ -84,6 +88,14 @@ public class Stellenausschreibung {
     }
     public void setReferenceNumber(String referenceNumber) {
         this.referenceNumber = referenceNumber;
+    }
+
+    @Column(name = "stellenId", nullable = false)
+    public String getStellenId() {
+        return stellenId;
+    }
+    public void setStellenId(String stellenId) {
+        this.stellenId = stellenId;
     }
 
     @Column(name = "title", nullable = false)

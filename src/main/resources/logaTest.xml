@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jobs>
+    <job>
+        <id>cb437556-c6a6-46dd-a38f-7419e36bbf14</id>
+        <referenceNumber>BAJ01_000004</referenceNumber>
+        <title>Test21032019</title>
+        <url>
+            https://mitarbeitertest.pi-ag.com/bewerber-web/?companyEid=BAJ01ang=D#positions?company=fd995d
+        </url>
+        <mandant>BAJ01</mandant>
+        <creationDate>2019-03-21</creationDate>
+        <publishFromDate>2020-07-07</publishFromDate>
+        <location/>
+        <hrConsultant>Admin Mitchelle Ann Blösl</hrConsultant>
+        <content><![CDATA[<p>Testesstetsetet</p>]]></content>
+        <selection1>Arzt</selection1>
+    </job>
+    <job>
+        <id>c9c96cbc-492d-419e-8a7b-b12b121f01da</id>
+        <title>Testauschreibung</title>
+        <shortName>Vollzeit</shortName>
+        -<url>
+        https://mitarbeitertest.pi-ag.com/bewerber-web/?companyEid=BAJ01lang=D#positions?company=698t989
+        </url>
+        <mandant>BAJ01</mandant>
+        <creationDate>2017-03-21</creationDate>
+        <publishFromDate>2020-07-07</publishFromDate>
+        <publishToDate>2020-07-07</publishToDate>
+        <location>Wiesbaden</location>
+        <country>Deutschland</country>
+       <hrConsultant>
+            Irina Musterfrau, Admin Mitchelle Ann Blösl, Chris Rohde
+        </hrConsultant>
+       <content>
+            <![CDATA[<p>Hier könnte ihr Stellenausschreibungstext stehen</p><p><br></p>]]>
+        </content>
+        <selection1>Consultant</selection1>
+        <selection2>Bachelor</selection2>
+</job>
+</jobs>
