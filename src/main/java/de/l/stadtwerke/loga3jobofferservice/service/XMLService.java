@@ -48,84 +48,112 @@ public class XMLService {
                         stelle.setStellenId(
                                 elem.getElementsByTagName("id").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setStellenId("");
                     }
 
                     if (elem.getElementsByTagName("referenceNumber") != null && elem.getElementsByTagName("referenceNumber").item(0) != null) {
                         stelle.setReferenceNumber(
                                 elem.getElementsByTagName("referenceNumber").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setReferenceNumber("");
                     }
 
                     if (elem.getElementsByTagName("title") != null && elem.getElementsByTagName("title").item(0) != null) {
                         stelle.setTitle(
                                 elem.getElementsByTagName("title").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setTitle("");
                     }
 
                     if (elem.getElementsByTagName("url") != null && elem.getElementsByTagName("url").item(0) != null) {
                         stelle.setUrl(
                                 elem.getElementsByTagName("url").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setUrl("");
                     }
 
                     if (elem.getElementsByTagName("mandant") != null && elem.getElementsByTagName("mandant").item(0) != null) {
                         stelle.setMandant(
                                 elem.getElementsByTagName("mandant").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setMandant("");
                     }
 
                     if (elem.getElementsByTagName("creationDate") != null && elem.getElementsByTagName("creationDate").item(0) != null) {
                         stelle.setCreationDate(
                                 elem.getElementsByTagName("creationDate").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setCreationDate("");
                     }
 
                     if (elem.getElementsByTagName("publishFromDate") != null && elem.getElementsByTagName("publishFromDate").item(0) != null) {
                         stelle.setPublishFromDate(
                                 elem.getElementsByTagName("publishFromDate").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setPublishFromDate("");
                     }
 
                     if (elem.getElementsByTagName("publishToDate") != null && elem.getElementsByTagName("publishToDate").item(0) != null) {
                         stelle.setPublishToDate(
                                 elem.getElementsByTagName("publishToDate").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setPublishToDate("");
                     }
 
                     if (elem.getElementsByTagName("location") != null && elem.getElementsByTagName("location").item(0) != null) {
                         stelle.setLocation(
                                 elem.getElementsByTagName("location").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setLocation("");
                     }
 
                     if (elem.getElementsByTagName("country") != null && elem.getElementsByTagName("country").item(0) != null) {
                         stelle.setCountry(
                             elem.getElementsByTagName("country").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setCountry("");
                     }
 
                     if (elem.getElementsByTagName("hrConsultant") != null && elem.getElementsByTagName("hrConsultant").item(0) != null) {
                         stelle.setHrConsultant(
                                 elem.getElementsByTagName("hrConsultant").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setHrConsultant("");
                     }
 
                     if (elem.getElementsByTagName("content") != null && elem.getElementsByTagName("content").item(0) != null) {
                         stelle.setContent(
                                 elem.getElementsByTagName("content").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setContent("");
                     }
 
                     if (elem.getElementsByTagName("selection1") != null && elem.getElementsByTagName("selection1").item(0) != null) {
-                        stelle.setSection1(
+                        stelle.setSelection1(
                                 elem.getElementsByTagName("selection1").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setSelection1("");
                     }
 
                     if (elem.getElementsByTagName("selection2") != null && elem.getElementsByTagName("selection2").item(0) != null) {
-                        stelle.setSection2(
+                        stelle.setSelection2(
                                 elem.getElementsByTagName("selection2").item(0).getTextContent()
                         );
+                    } else {
+                        stelle.setSelection2("");
                     }
 
 //                    if (elem.getElementsByTagName("selection3") != null && elem.getElementsByTagName("selection3").item(0) != null) {

@@ -35,9 +35,9 @@ public class Stellenausschreibung {
 
     private String content;
 
-    private String section1;
+    private String selection1;
 
-    private String section2;
+    private String selection2;
 
 
     @OneToOne(fetch = FetchType.LAZY, optional = true, cascade=CascadeType.ALL)
@@ -57,8 +57,8 @@ public class Stellenausschreibung {
                                 String country,
                                 String hrConsultant,
                                 String content,
-                                String section1,
-                                String section2,
+                                String selection1,
+                                String selection2,
                                 FileDB pdf) {
         this.id = id;
         this.stellenId = stellenId;
@@ -73,8 +73,8 @@ public class Stellenausschreibung {
         this.country = country;
         this.hrConsultant = hrConsultant;
         this.content = content;
-        this.section1 = section1;
-        this.section2 = section2;
+        this.selection1 = selection1;
+        this.selection2 = selection2;
         this.pdf = pdf;
     }
 
@@ -103,7 +103,7 @@ public class Stellenausschreibung {
         return title;
     }
     public void setTitle(String title) {
-        this.url = title;
+        this.title = title;
     }
 
     @Column(name = "url", nullable = false)
@@ -178,20 +178,20 @@ public class Stellenausschreibung {
         this.content = content;
     }
 
-    @Column(name = "section1", nullable = false)
-    public String getSection1() {
-        return section1;
+    @Column(name = "selection1", nullable = false)
+    public String getSelection1() {
+        return selection1;
     }
-    public void setSection1(String section1) {
-        this.section1 = section1;
+    public void setSelection1(String selection1) {
+        this.selection1 = selection1;
     }
 
-    @Column(name = "section2", nullable = false)
-    public String getSection2() {
-        return section2;
+    @Column(name = "selection2", nullable = false)
+    public String getSelection2() {
+        return selection2;
     }
-    public void setSection2(String section2) {
-        this.section2 = section2;
+    public void setSelection2(String selection2) {
+        this.selection2 = selection2;
     }
 
     public FileDB getPdf() {return pdf;}
