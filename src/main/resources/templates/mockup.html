@@ -1,78 +1,227 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="keywords" content=""/>
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="HandheldFriendly" content="True"/>
-    <meta name="MobileOptimized" content="320"/>
 
-    <title th:text="${name}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="www.l.de/karriere/angebot/teamleiter-lager-m-w-d-_400"/>
-    <meta property="og:title" content="Teamleiter Lager (m/w/d) "/>
-    <meta property="og:description" content="Ihre Aufgaben
-
-Wahrnehmung der Führungsverantwortung entsprechend der Führun"/>
-    <meta property="og:image" content="https://www.l.de/file/image/5092/e"/>
-
-
-    <link href="https://www.l.de/assets/images/favi.png" rel="shortcut icon"/>
-
-    <link rel="stylesheet" th:href="@{css/main.css}"/>
-    <link rel="stylesheet" th:href="@{css/jquery-ui.css}"/>
-    <link rel="stylesheet" type="text/css" href="@{css/ie10.css}"/>
-
+    <title>
+    </title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
 </head>
 
-<body class="group-without-sidebar ">
-<div id="maincontent" class="underlinelinks">
-    <div class="fullwidth">
-        <div class="content">
-            <div class="staffing_showDetailSecond">
-                <div class="staff_detail">
-                    <div class="row contain_row">
-                        <div class="grid-3-4">
-                            <div class="text_show padding_right">
-                                <h2>Job:</h2>
-                                <ul>
-                                    <li>
-                                        <td th:text="${stelle.jobbezeichnung}"></td>
-                                    </li>
-                                </ul>
+<body>
 
-                                <h2>Ihre Aufgaben sind:</h2>
-                                <ul>
-                                    <li>
-                                        <td th:text="${stelle.aufgaben}"></td>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="text_show padding_right margin_top">
-                                <h2>Die Kategorie ist:</h2>
-                                <ul>
-                                    <li>
-                                        <td th:text="${stelle.kategorie}"></td>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="text_show padding_right margin_top">
-                                <h2>Bitte wenden Sie sich bei Fragen an:</h2>
-                                <ul>
-                                    <li>
-                                        <td th:text="${stelle.kontaktperson}"></td>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="stl_02">
+
+    <img src="images/mockup.png" class="stl_04"  />
+
+    <div class="stl_view">
+
+        <div class="stl_05 stl_06">
+
+            <div class="stl_01" style="left: 39.3183em; top: 2.7492em;"><span class="stl_07 stl_08 stl_09"
+                                                                              style="word-spacing: 0.0012em;">Ihr Job im #TeamLeipziger &nbsp;</span>
             </div>
+
+            <div class="stl_01" style="left: 26.5442em; top: 3.917em;"><span class="stl_10 stl_08 stl_11"
+                                                                             style="word-spacing: 0.0023em;"> <span th:text="|${stelle.title} (m/w/d)  |"></span></span>
+            </div>
+
+            <div class="stl_01" style="left: 29.2358em; top: 5.5486em;"><span class="stl_10 stl_08 stl_12"
+                                                                              style="word-spacing: -0.0022em;">für kreative Berufsumschreibung &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 21.0011em;"><span class="stl_10 stl_08 stl_13"
+                                                                            style="word-spacing: 0.0026em;"><span th:text="|${stelle.title} (m/w/d)  |"></span></span>
+            </div>
+
+            <div class="stl_01" style="left: 37.0558em; top: 25.2392em;"><span class="stl_14 stl_08 stl_15"
+                                                                               style="word-spacing: -0.0007em;">Gut zu wissen &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 37.0558em; top: 27.7334em;"><span class="stl_16 stl_08 stl_17"
+                                                                               style="word-spacing: 0.3453em;">• </span><span
+                    class="stl_21 stl_08 stl_20"
+                    style="word-spacing: -0.0042em;"><span th:text="|${stelle.befristung}|"></span></span><span
+                    class="stl_21 stl_08 stl_22" style="word-spacing: -0.0094em;"><span th:text="|, ${stelle.workTime} h/Woche |"></span></span></div>
+
+          <div class="stl_01" style="left: 37.8758em; top: 28.6434em;"><span class="stl_21 stl_08 stl_23"><span th:text="|${stelle.shortName}|"></span></span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 25.2592em;"><span class="stl_14 stl_08 stl_13"
+                                                                            style="word-spacing: 0.0009em;">Ihre Aufgaben &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 26.8234em;">
+                <span class="stl_21 stl_08 stl_15"> <span th:text="|• ${stelle.content1}|"></span> </span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 27.7434em;">
+                <span class="stl_16 stl_08 stl_15"></span>
+                <span class="stl_21 stl_08 stl_24">
+                    <span th:text="|• ${stelle.content2}|"></span>
+                </span>
+            </div>
+            <div class="stl_01" style="left: 3.66em; top: 28.6534em;">
+                <span class="stl_16 stl_08 stl_15"></span>
+                <span class="stl_21 stl_08 stl_24">
+                    <span th:text="|• ${stelle.content3}|"></span>
+                </span>
+            </div>
+            <div class="stl_01" style="left: 3.66em; top: 29.5734em;">
+                <span class="stl_16 stl_08 stl_15"></span>
+                <span class="stl_21 stl_08 stl_24">
+                    <span th:text="|• ${stelle.content4}|"></span>
+                </span>
+            </div>
+            <div class="stl_01" style="left: 3.66em; top: 30.4934em;">
+                <span class="stl_16 stl_08 stl_15"></span>
+                <span class="stl_21 stl_08 stl_24">
+                    <span th:text="|• ${stelle.content5}|"></span>&nbsp;
+                </span>
+            </div>
+
+            <div class="stl_01" style="left: 37.0558em; top: 29.5634em;"><span class="stl_16 stl_08 stl_17"
+                                                                               style="word-spacing: 0.3453em;">• </span><span
+                    class="stl_21 stl_08 stl_15" style="word-spacing: -0.0037em;">ab sofort in Leipzig &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 37.0558em; top: 30.4734em;"><span class="stl_16 stl_08 stl_17"
+                                                                               style="word-spacing: 0.3453em;"></span><span
+                    class="stl_21 stl_08 stl_25"
+                    style="word-spacing: -0.004em;"><span th:text="|• ${stelle.verguetung}|"></span></span></div>
+
+            <div class="stl_01" style="left: 37.0558em; top: 31.3934em;"><span class="stl_16 stl_08 stl_17"
+                                                                               style="word-spacing: 0.3453em;">• </span><span
+                    class="stl_21 stl_08 stl_19"
+                    style="word-spacing: -0.002em;">Bewerbung mit Angabe der Ge- &nbsp;</span></div>
+
+            <div class="stl_01" style="left: 37.8758em; top: 32.3034em;"><span class="stl_21 stl_08 stl_15"
+                                                                               style="word-spacing: -0.0047em;">haltsvorstellung sowie frühest- &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 37.8758em; top: 33.2234em;"><span class="stl_21 stl_08 stl_26"
+                                                                               style="word-spacing: -0.0044em;">möglichen Eintrittstermin &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 37.0558em; top: 34.1334em;"><span class="stl_16 stl_08 stl_17"
+                                                                               style="word-spacing: 0.3453em;">• </span><span
+                    class="stl_27 stl_08 stl_15" style="word-spacing: -0.0041em;">Bewerbungsunterlagen be- &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 37.8758em; top: 35.0551em;"><span class="stl_27 stl_08 stl_19"
+                                                                               style="word-spacing: 0.0007em;">rücksichtigen wir ausschließ- &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 37.8758em; top: 35.9751em; z-index: 1047;"><span
+                    class="stl_27 stl_08 stl_28" style="word-spacing: 0.0064em;">lich im pdf-Format &nbsp;</span></div>
+
+            <div class="stl_01" style="left: 3.66em; top: 32.1092em;"><span class="stl_14 stl_08 stl_13"
+                                                                            style="word-spacing: -0.0009em;">Unser Angebot &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 33.6834em;"><span class="stl_16 stl_08 stl_17"
+                                                                            style="word-spacing: 0.3453em;"></span><span
+                    class="stl_21 stl_08 stl_19"
+                    style="word-spacing: -0.0032em;"><span th:text="|• ${stelle.offer1}|"></span></span></div>
+
+            <div class="stl_01" style="left: 3.66em; top: 34.6034em;"><span class="stl_16 stl_08 stl_17"
+                                                                            style="word-spacing: 0.3453em;"></span><span
+                    class="stl_21 stl_08 stl_19"
+                    style="word-spacing: -0.0032em;"><span th:text="|• ${stelle.offer2}|"></span></span></div>
+
+            <div class="stl_01" style="left: 3.66em; top: 35.5151em;"><span class="stl_16 stl_08 stl_17"
+                                                                            style="word-spacing: 0.3453em;"></span><span
+                    class="stl_21 stl_08 stl_19"
+                    style="word-spacing: -0.0032em;"><span th:text="|• ${stelle.offer3}|"></span></span></div>
+
+            <div class="stl_01" style="left: 3.66em; top: 36.4351em;"><span class="stl_16 stl_08 stl_17"
+                                                                            style="word-spacing: 0.3453em;"></span><span
+                    class="stl_21 stl_08 stl_19"
+                    style="word-spacing: -0.0032em;"><span th:text="|• ${stelle.offer4}|"></span></span></div>
+
+            <div class="stl_01" style="left: 3.66em; top: 37.3451em;"><span class="stl_16 stl_08 stl_17"
+                                                                            style="word-spacing: 0.3453em;"></span><span
+                    class="stl_21 stl_08 stl_19"
+                    style="word-spacing: -0.0032em;"><span th:text="|• ${stelle.offer5}|"></span></span></div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 36.6409em; z-index: 208;"><span
+                    class="stl_14 stl_08 stl_29"
+                    style="visibility: hidden; word-spacing: -0.0017em;">Jetzt bewerben </span><span
+                    class="stl_30 stl_08 stl_31" style="visibility: hidden;"></span></div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 38.2151em;"><span class="stl_21 stl_08 stl_19"
+                                                                               style="word-spacing: 0.0007em;"> <span th:text="${stelle.hrConsultant}"></span> &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 39.1251em;"><span class="stl_21 stl_08 stl_32"
+                                                                               style="word-spacing: 0.002em;">HR Business Partner &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 40.0451em;"><a href="mailto:karriere.stadtwerke@L.de"
+                                                                            target="_blank"><span
+                    class="stl_21 stl_08 stl_19">karriere.stadtwerke@L.de &nbsp;</span></a></div>
+
+            <div class="stl_01" style="left: 3.66em; top: 38.9708em;"><span class="stl_14 stl_08 stl_29"
+                                                                            style="word-spacing: -0.008em;">Ihr Profil &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 40.5451em;"><span class="stl_16 stl_08 stl_17"
+                                                                            style="word-spacing: 0.3453em;">• </span><span
+                    class="stl_21 stl_08 stl_15"><span th:text="${stelle.selection1}"></span>&nbsp;</span></div>
+
+            <div class="stl_01" style="left: 3.66em; top: 41.4651em;"><span class="stl_16 stl_08 stl_17"
+                                                                            style="word-spacing: 0.3453em;">• </span><span
+                    class="stl_21 stl_08 stl_24"><span th:text="${stelle.selection2}"></span>&nbsp;</span></div>
+
+            <div class="stl_01" style="left:3.66em;top: 42.3751em; "><span class="stl_15 stl_08 stl_16" style="word-spacing:0.3453em;">• </span><span class="stl_19 stl_08 stl_21"><span th:text="${stelle.selection3}"></span></span></div>
+            <div class="stl_01" style="left:3.66em;top: 43.2951em; "><span class="stl_15 stl_08 stl_16" style="word-spacing:0.3453em;">• </span><span class="stl_19 stl_08 stl_21"><span th:text="${stelle.selection4}"></span></span></div>
+            <div class="stl_01" style="left:3.66em;top: 44.2051em; "><span class="stl_15 stl_08 stl_16" style="word-spacing:0.3453em;">• </span><span class="stl_19 stl_08 stl_21"><span th:text="${stelle.selection5}"></span></span></div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 41.8751em;"><span class="stl_21 stl_08 stl_19"
+                                                                               style="word-spacing: 0.0015em;">Stadtwerke Leipzig GmbH &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 42.7951em;"><span class="stl_21 stl_08 stl_33"
+                                                                               style="word-spacing: -0.0034em;">Postfach 10 06 14 &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 43.7151em;"><span class="stl_21 stl_08 stl_34"
+                                                                               style="word-spacing: 0.0012em;">04006 Leipzig &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 36.3958em; top: 45.1251em;"><span class="stl_07 stl_08 stl_17"
+                                                                               style="word-spacing: -0.0022em;">Willkommen im #TeamLeipziger! &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 46.7451em;"><span class="stl_21 stl_08 stl_26"
+                                                                            style="word-spacing: 0.0025em;">Unsere Kunden liegen uns am Herzen. Als 100%iges Tochterunternehmen der Leipziger Stadtwerke &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 47.6651em;"><span class="stl_21 stl_08 stl_15"
+                                                                            style="word-spacing: -0.002em;">kümmert sich deshalb die LAS GmbH um die Kommunikation mit Privat- und Geschäftskunden, die &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 48.5751em;"><span class="stl_21 stl_08 stl_25"
+                                                                            style="word-spacing: -0.0007em;">Pflege der Kundendaten und die Leistungsabrechnung. Jeden Tag sorgen engagierte Mitarbeiterinnen &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 49.4976em;"><span class="stl_21 stl_08 stl_24"
+                                                                            style="word-spacing: -0.0002em;">und Mit-arbeiter mit viel Herzblut dafür, dass unsere Kunden zufrieden sind. Werden auch Sie Teil un- &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 50.4076em;"><span class="stl_21 stl_08 stl_35"
+                                                                            style="word-spacing: -0.0011em;">seres Teams. &nbsp;</span>
+            </div>
+
+            <div class="stl_01" style="left: 3.66em; top: 66.537em;"><a href="http://www.L.de/TeamLeipziger"
+                                                                        target="_blank"><span
+                    class="stl_36 stl_08 stl_11">www.L.de/TeamLeipziger &nbsp;</span></a></div>
         </div>
     </div>
 </div>
-</body>
 
+</body>
 </html>

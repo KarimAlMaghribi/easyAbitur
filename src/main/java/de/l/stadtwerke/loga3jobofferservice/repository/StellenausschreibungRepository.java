@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface StellenausschreibungRepository extends JpaRepository<Stellenausschreibung, String> {
     //Stellenausschreibung findByFileDBid(String fileDBid);
+    boolean existsStellenausschreibungByStellenId(String stellenId);
 }

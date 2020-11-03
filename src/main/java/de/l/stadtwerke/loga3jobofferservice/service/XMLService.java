@@ -19,10 +19,11 @@ import java.util.List;
 public class XMLService {
 
     @Autowired
-    private StellenausschreibungRepository sar;
+    private StellenausschreibungRepository stellenausschreibungRepository;
 
-    public void parseJobs(String URL) {
+    public List<Stellenausschreibung> parseJobs() {
 
+        List<Stellenausschreibung> stellenListe = new ArrayList();
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -34,13 +35,12 @@ public class XMLService {
 
             NodeList nodeList = doc.getElementsByTagName("job");
 
-            List<Stellenausschreibung> stellenListe = new ArrayList<Stellenausschreibung>();
 
             for (int i = 0; i < nodeList.getLength(); i++) {
 
                 Node node = nodeList.item(i);
 
-                if(node.getNodeType() == Node.ELEMENT_NODE) {
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element elem = (Element) node;
                     Stellenausschreibung stelle = new Stellenausschreibung();
 
@@ -58,6 +58,14 @@ public class XMLService {
                         );
                     } else {
                         stelle.setReferenceNumber("");
+                    }
+
+                    if (elem.getElementsByTagName("befristung") != null && elem.getElementsByTagName("befristung").item(0) != null) {
+                        stelle.setBefristung(
+                                elem.getElementsByTagName("befristung").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setBefristung("");
                     }
 
                     if (elem.getElementsByTagName("title") != null && elem.getElementsByTagName("title").item(0) != null) {
@@ -99,6 +107,13 @@ public class XMLService {
                     } else {
                         stelle.setPublishFromDate("");
                     }
+                    if (elem.getElementsByTagName("shortName") != null && elem.getElementsByTagName("shortName").item(0) != null) {
+                        stelle.setShortName(
+                                elem.getElementsByTagName("shortName").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setPublishFromDate("");
+                    }
 
                     if (elem.getElementsByTagName("publishToDate") != null && elem.getElementsByTagName("publishToDate").item(0) != null) {
                         stelle.setPublishToDate(
@@ -118,7 +133,7 @@ public class XMLService {
 
                     if (elem.getElementsByTagName("country") != null && elem.getElementsByTagName("country").item(0) != null) {
                         stelle.setCountry(
-                            elem.getElementsByTagName("country").item(0).getTextContent()
+                                elem.getElementsByTagName("country").item(0).getTextContent()
                         );
                     } else {
                         stelle.setCountry("");
@@ -132,12 +147,84 @@ public class XMLService {
                         stelle.setHrConsultant("");
                     }
 
-                    if (elem.getElementsByTagName("content") != null && elem.getElementsByTagName("content").item(0) != null) {
-                        stelle.setContent(
-                                elem.getElementsByTagName("content").item(0).getTextContent()
+                    if (elem.getElementsByTagName("content1") != null && elem.getElementsByTagName("content1").item(0) != null) {
+                        stelle.setContent1(
+                                elem.getElementsByTagName("content1").item(0).getTextContent()
                         );
                     } else {
-                        stelle.setContent("");
+                        stelle.setContent1("");
+                    }
+
+                    if (elem.getElementsByTagName("content2") != null && elem.getElementsByTagName("content2").item(0) != null) {
+                        stelle.setContent2(
+                                elem.getElementsByTagName("content2").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setContent2("");
+                    }
+
+                    if (elem.getElementsByTagName("content3") != null && elem.getElementsByTagName("content3").item(0) != null) {
+                        stelle.setContent3(
+                                elem.getElementsByTagName("content3").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setContent3("");
+                    }
+
+                    if (elem.getElementsByTagName("content4") != null && elem.getElementsByTagName("content4").item(0) != null) {
+                        stelle.setContent4(
+                                elem.getElementsByTagName("content4").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setContent4("");
+                    }
+
+                    if (elem.getElementsByTagName("content5") != null && elem.getElementsByTagName("content5").item(0) != null) {
+                        stelle.setContent5(
+                                elem.getElementsByTagName("content5").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setContent5("");
+                    }
+
+                    if (elem.getElementsByTagName("offer1") != null && elem.getElementsByTagName("offer1").item(0) != null) {
+                        stelle.setOffer1(
+                                elem.getElementsByTagName("offer1").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setOffer1("");
+                    }
+
+                    if (elem.getElementsByTagName("offer2") != null && elem.getElementsByTagName("offer2").item(0) != null) {
+                        stelle.setOffer2(
+                                elem.getElementsByTagName("offer2").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setOffer2("");
+                    }
+
+                    if (elem.getElementsByTagName("offer3") != null && elem.getElementsByTagName("offer3").item(0) != null) {
+                        stelle.setOffer3(
+                                elem.getElementsByTagName("offer3").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setOffer3("");
+                    }
+
+                    if (elem.getElementsByTagName("offer4") != null && elem.getElementsByTagName("offer4").item(0) != null) {
+                        stelle.setOffer4(
+                                elem.getElementsByTagName("offer4").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setOffer4("");
+                    }
+
+                    if (elem.getElementsByTagName("offer5") != null && elem.getElementsByTagName("offer5").item(0) != null) {
+                        stelle.setOffer5(
+                                elem.getElementsByTagName("offer5").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setOffer5("");
                     }
 
                     if (elem.getElementsByTagName("selection1") != null && elem.getElementsByTagName("selection1").item(0) != null) {
@@ -156,6 +243,46 @@ public class XMLService {
                         stelle.setSelection2("");
                     }
 
+                    if (elem.getElementsByTagName("selection3") != null && elem.getElementsByTagName("selection3").item(0) != null) {
+                        stelle.setSelection3(
+                                elem.getElementsByTagName("selection3").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setSelection3("");
+                    }
+
+                    if (elem.getElementsByTagName("selection4") != null && elem.getElementsByTagName("selection4").item(0) != null) {
+                        stelle.setSelection4(
+                                elem.getElementsByTagName("selection4").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setSelection4("");
+                    }
+
+                    if (elem.getElementsByTagName("selection5") != null && elem.getElementsByTagName("selection5").item(0) != null) {
+                        stelle.setSelection5(
+                                elem.getElementsByTagName("selection5").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setSelection5("");
+                    }
+
+                    if (elem.getElementsByTagName("verguetung") != null && elem.getElementsByTagName("verguetung").item(0) != null) {
+                        stelle.setVerguetung(
+                                elem.getElementsByTagName("verguetung").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setVerguetung("");
+                    }
+
+                    if (elem.getElementsByTagName("workTime") != null && elem.getElementsByTagName("workTime").item(0) != null) {
+                        stelle.setWorkTime(
+                                elem.getElementsByTagName("workTime").item(0).getTextContent()
+                        );
+                    } else {
+                        stelle.setWorkTime("");
+                    }
+
 //                    if (elem.getElementsByTagName("selection3") != null && elem.getElementsByTagName("selection3").item(0) != null) {
 //                        stelle.setSelection(
 //                                elem.getElementsByTagName("selection1").item(0).getTextContent()
@@ -164,11 +291,13 @@ public class XMLService {
 
                     stellenListe.add(stelle);
                 }
+
             }
-            sar.saveAll(stellenListe);
+
         } catch (Exception ex) {
-                System.out.println(ex);
+            System.out.println(ex);
         }
+        return stellenListe;
     }
 
 }
