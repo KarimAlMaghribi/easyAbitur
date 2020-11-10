@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link rel="stylesheet" href="css/template2.css"/>
+  </head>
+  <body>
+  <img class= "titlepic" src="images/titlepic.png"/>
+    <div class="grid-container">
+        <div class="grid-item1">
+            <div id="teamLeipziger">Ihr Job im #TeamLeipziger</div>
+            <div id="jobName"><span th:text="${stelle.title}"></span></div>
+        </div>
+        <div class="content">
+            <div class="grid-item2">
+                <h2 id="stellenBezeichnung"><span th:text="${stelle.title}"></span></h2>
+                <h3>Ihre Aufgaben</h3>
+                <div th:remove="tag" th:utext="${stelle.taskHTML}"></div>
+                <h3>Unser Angebot</h3>
+                <div th:remove="tag" th:utext="${stelle.offerHTML}"></div>
+                <h3>Ihr Profil</h3>
+                <ul>
+                    <div th:remove="tag" th:utext="${stelle.profileHTML}"></div>
+                </ul>
+                <div th:remove="tag" th:utext="${stelle.getAboutUsHTML()}"></div>
+            </div>
+            <div class="grid-item3">
+                www.L.de/TeamLeipziger
+            </div>
+            <div class="grid-item4">
+                <div id="bedingungen">
+                    <h3>Gut zu wissen</h3>
+                    <div th:remove="tag" th:utext="${stelle.goodToKnowHTML}"></div>
+                </div>
+                <h3>Jetzt bewerben >></h3>
+                <p>
+                    <span th:text="${stelle.hrConsultant}"></span> <br/>
+                    HR Business Partner <br/>
+                    karriere.stadtwerke@L.de
+                </p>
+                <p>
+                    Stadtwerke Leipzig GmbH <br/>
+                    Postfach 10 06 14 <br/>
+                    04006 Leipzig
+                </p>
+                <h4>Willkommen im #TeamLeipziger!</h4>
+                <img class= "logopic" src="images/logo1.png"/>
+            </div>
+
+        </div>
+    </div>    
+  </body>
+</html>

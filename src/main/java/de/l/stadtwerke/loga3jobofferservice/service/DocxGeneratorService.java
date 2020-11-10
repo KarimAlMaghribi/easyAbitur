@@ -40,10 +40,7 @@ public class DocxGeneratorService {
         VariablePrepare.prepare(wordMLPackage);
 
         HashMap<String, String> variables = new HashMap<>();
-        variables.put("firstName", stelle.getContent1());
-        variables.put("lastName", stelle.getCountry());
-        variables.put("salutation", stelle.getLocation());
-        variables.put("message", stelle.getPublishToDate());
+
         documentPart.variableReplace(variables);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

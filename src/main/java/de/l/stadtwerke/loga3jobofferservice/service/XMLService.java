@@ -2,6 +2,8 @@ package de.l.stadtwerke.loga3jobofferservice.service;
 
 import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung;
 import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
@@ -58,14 +60,6 @@ public class XMLService {
                         );
                     } else {
                         stelle.setReferenceNumber("");
-                    }
-
-                    if (elem.getElementsByTagName("befristung") != null && elem.getElementsByTagName("befristung").item(0) != null) {
-                        stelle.setBefristung(
-                                elem.getElementsByTagName("befristung").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setBefristung("");
                     }
 
                     if (elem.getElementsByTagName("title") != null && elem.getElementsByTagName("title").item(0) != null) {
@@ -147,147 +141,30 @@ public class XMLService {
                         stelle.setHrConsultant("");
                     }
 
-                    if (elem.getElementsByTagName("content1") != null && elem.getElementsByTagName("content1").item(0) != null) {
-                        stelle.setContent1(
-                                elem.getElementsByTagName("content1").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setContent1("");
-                    }
+                    if (elem.getElementsByTagName("content") != null && elem.getElementsByTagName("content").item(0) != null) {
+                        String content = elem.getElementsByTagName("content").item(0).getTextContent();
 
-                    if (elem.getElementsByTagName("content2") != null && elem.getElementsByTagName("content2").item(0) != null) {
-                        stelle.setContent2(
-                                elem.getElementsByTagName("content2").item(0).getTextContent()
+                        String contentCopy = new String(content);
+                        stelle.setTaskHTML(
+                                StringUtils.substringBetween(contentCopy, "<p>Ihre Aufgaben</p>","<p><br></p> <p>Unser Angebot</p> ")
                         );
-                    } else {
-                        stelle.setContent2("");
-                    }
 
-                    if (elem.getElementsByTagName("content3") != null && elem.getElementsByTagName("content3").item(0) != null) {
-                        stelle.setContent3(
-                                elem.getElementsByTagName("content3").item(0).getTextContent()
+                        stelle.setOfferHTML(
+                                StringUtils.substringBetween(contentCopy, "<p>Unser Angebot</p>","<p>Ihr Profil</p>")
                         );
-                    } else {
-                        stelle.setContent3("");
-                    }
 
-                    if (elem.getElementsByTagName("content4") != null && elem.getElementsByTagName("content4").item(0) != null) {
-                        stelle.setContent4(
-                                elem.getElementsByTagName("content4").item(0).getTextContent()
+                        stelle.setProfileHTML(
+                                StringUtils.substringBetween(contentCopy, "<p>Ihr Profil</p> <ul>","</ul>")
                         );
-                    } else {
-                        stelle.setContent4("");
-                    }
-
-                    if (elem.getElementsByTagName("content5") != null && elem.getElementsByTagName("content5").item(0) != null) {
-                        stelle.setContent5(
-                                elem.getElementsByTagName("content5").item(0).getTextContent()
+                        stelle.setAboutUsHTML(
+                                "<p>Leipzigs Energiezukunft liegt uns am Herzen. Deshalb gehen wir bewusst neue Wege, um die Energiewende aktiv mitzugestalten. Mit neuen Ideen, Expertenwissen und viel Engagement sorgen unsere rund 1.200 Mitarbeiterinnen und Mitarbeiter dafür, dass Leipzig die Energie nicht ausgeht – heute nicht und auch nicht in Zukunft. Geben auch Sie Leipzig Energie.</p>"
                         );
-                    } else {
-                        stelle.setContent5("");
-                    }
-
-                    if (elem.getElementsByTagName("offer1") != null && elem.getElementsByTagName("offer1").item(0) != null) {
-                        stelle.setOffer1(
-                                elem.getElementsByTagName("offer1").item(0).getTextContent()
+                        stelle.setGoodToKnowHTML(
+                                StringUtils.substringBetween(contentCopy, "<p>Gut zu wissen</p>","<p><br></p> <p>Ihre Aufgaben</p> ")
                         );
-                    } else {
-                        stelle.setOffer1("");
-                    }
 
-                    if (elem.getElementsByTagName("offer2") != null && elem.getElementsByTagName("offer2").item(0) != null) {
-                        stelle.setOffer2(
-                                elem.getElementsByTagName("offer2").item(0).getTextContent()
-                        );
                     } else {
-                        stelle.setOffer2("");
                     }
-
-                    if (elem.getElementsByTagName("offer3") != null && elem.getElementsByTagName("offer3").item(0) != null) {
-                        stelle.setOffer3(
-                                elem.getElementsByTagName("offer3").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setOffer3("");
-                    }
-
-                    if (elem.getElementsByTagName("offer4") != null && elem.getElementsByTagName("offer4").item(0) != null) {
-                        stelle.setOffer4(
-                                elem.getElementsByTagName("offer4").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setOffer4("");
-                    }
-
-                    if (elem.getElementsByTagName("offer5") != null && elem.getElementsByTagName("offer5").item(0) != null) {
-                        stelle.setOffer5(
-                                elem.getElementsByTagName("offer5").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setOffer5("");
-                    }
-
-                    if (elem.getElementsByTagName("selection1") != null && elem.getElementsByTagName("selection1").item(0) != null) {
-                        stelle.setSelection1(
-                                elem.getElementsByTagName("selection1").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setSelection1("");
-                    }
-
-                    if (elem.getElementsByTagName("selection2") != null && elem.getElementsByTagName("selection2").item(0) != null) {
-                        stelle.setSelection2(
-                                elem.getElementsByTagName("selection2").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setSelection2("");
-                    }
-
-                    if (elem.getElementsByTagName("selection3") != null && elem.getElementsByTagName("selection3").item(0) != null) {
-                        stelle.setSelection3(
-                                elem.getElementsByTagName("selection3").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setSelection3("");
-                    }
-
-                    if (elem.getElementsByTagName("selection4") != null && elem.getElementsByTagName("selection4").item(0) != null) {
-                        stelle.setSelection4(
-                                elem.getElementsByTagName("selection4").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setSelection4("");
-                    }
-
-                    if (elem.getElementsByTagName("selection5") != null && elem.getElementsByTagName("selection5").item(0) != null) {
-                        stelle.setSelection5(
-                                elem.getElementsByTagName("selection5").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setSelection5("");
-                    }
-
-                    if (elem.getElementsByTagName("verguetung") != null && elem.getElementsByTagName("verguetung").item(0) != null) {
-                        stelle.setVerguetung(
-                                elem.getElementsByTagName("verguetung").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setVerguetung("");
-                    }
-
-                    if (elem.getElementsByTagName("workTime") != null && elem.getElementsByTagName("workTime").item(0) != null) {
-                        stelle.setWorkTime(
-                                elem.getElementsByTagName("workTime").item(0).getTextContent()
-                        );
-                    } else {
-                        stelle.setWorkTime("");
-                    }
-
-//                    if (elem.getElementsByTagName("selection3") != null && elem.getElementsByTagName("selection3").item(0) != null) {
-//                        stelle.setSelection(
-//                                elem.getElementsByTagName("selection1").item(0).getTextContent()
-//                        );
-//                    }
 
                     stellenListe.add(stelle);
                 }

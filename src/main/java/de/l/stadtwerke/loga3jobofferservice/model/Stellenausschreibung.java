@@ -64,50 +64,20 @@ public class Stellenausschreibung {
     @Column(name = "verguetung")
     private String verguetung;
 
-    @Column(name = "content1")
-    private String content1;
+    @Column(name = "taskHTML", length = 2048)
+    private String taskHTML;
 
-    @Column(name = "content2")
-    private String content2;
+    @Column(name = "offerHTML", length = 2048)
+    private String offerHTML;
 
-    @Column(name = "content3")
-    private String content3;
+    @Column(name = "profileHTML", length = 2048)
+    private String profileHTML;
 
-    @Column(name = "content4")
-    private String content4;
+    @Column(name = "goodToKnowHTML", length = 2048)
+    private String goodToKnowHTML;
 
-    @Column(name = "content5")
-    private String content5;
-
-    @Column(name = "offer1")
-    private String offer1;
-
-    @Column(name = "offer2")
-    private String offer2;
-
-    @Column(name = "offer3")
-    private String offer3;
-
-    @Column(name = "offer4")
-    private String offer4;
-
-    @Column(name = "offer5")
-    private String offer5;
-
-    @Column(name = "selection1")
-    private String selection1;
-
-    @Column(name = "selection2")
-    private String selection2;
-
-    @Column(name = "selection3")
-    private String selection3;
-
-    @Column(name = "selection4")
-    private String selection4;
-
-    @Column(name = "selection5")
-    private String selection5;
+    @Column(name = "aboutUsHTML", length = 2048)
+    private String aboutUsHTML;
 
     @OneToOne(fetch = FetchType.LAZY, optional = true, cascade=CascadeType.ALL)
     @JoinColumn(name = "files", nullable = true)

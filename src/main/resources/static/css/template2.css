@@ -1,0 +1,135 @@
+@page {
+    margin: 0 0 0 -1px;
+}
+
+html {
+    position: relative;
+    min-width: 21cm;
+    min-height: 29.7cm;
+    height: 100%;
+}
+    
+body{
+        position: absolute;
+        width: 21cm;
+        height: 29.7cm;
+        margin: auto;
+        /* margin: 30mm 45mm 30mm 45mm;  */
+        background-repeat: no-repeat;
+        font-family: Calibri,'Calibri',Arial,sans-serif;
+        -webkit-font-smoothing: antialiased;
+        font-size: 0.7em;
+}
+.content{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 8cm;
+}
+.grid-container {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-template-rows: 3fr 6fr 1fr;
+    grid-template-columns: 70% 30%;
+    position: absolute;
+    top: 1cm;
+    grid-template-areas:
+    "header header"
+    "textLeft textRight"
+    "fooderLeft footerRight";
+  }
+
+  .grid-item1 {
+    grid-area: header;
+    text-align: right;
+    padding: 1cm;
+    position: absolute;
+    top:0;
+    right: 0.5cm;
+  }
+
+  .grid-item2 {
+    grid-area: textLeft;
+    text-align: left;
+    padding-left: 1.5cm;
+    padding-right: 1cm;
+    width: 12cm;
+  }
+
+  .grid-item3 {
+    grid-area: fooderLeft;
+    text-align: left;
+    padding-left: 1.5cm;
+    padding-top: 3cm;
+  }
+
+  .logopic {
+      position: absolute;
+      width: 5cm;
+      height: auto;
+      top:17cm;
+      right: 0.5cm;
+  }
+
+  .grid-item4 {
+      grid-area: textRight;
+      text-align: left;
+      padding-top: 1.5cm;
+      padding-right: 0.3cm;
+      width: 5cm;
+      position: absolute;
+      top: 1.1cm;
+      right: 0.5cm
+  }
+  ul {
+      margin-top: -0.4cm;
+  }
+
+
+#jobName {
+    color: #032c58;
+    font-weight: bold;
+    font-size: large;
+}
+.titlepic {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: auto;
+}
+
+#teamLeipziger {
+    color: #fbc10f;
+    font-weight: bold;
+    font-family: Calibri, sans-serif;
+}
+
+#bedingungen {
+    border-color: #fbc10f;
+    border-radius: 0cm 0cm 1cm 0cm;
+    border-style: solid;
+    border-width: 0.05cm;
+    padding-left: 0.4cm;
+    padding-right: 0.4cm;
+}
+
+h2 {
+    padding-bottom: 1cm;
+    color: #032c58;
+}
+
+h3 {
+    color: #032c58;
+    margin-block-end: 0cm;
+}
+
+h4 {
+    color: #032c58;
+}
+
+ul {
+    padding-left: 0.5cm;
+    padding-top: 0.25cm;
+    margin-block-start: 0cm;
+}

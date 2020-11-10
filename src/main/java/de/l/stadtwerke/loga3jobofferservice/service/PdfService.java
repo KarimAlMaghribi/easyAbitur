@@ -50,8 +50,6 @@ public class PdfService {
         return stellenausschreibung;
     }
 
-
-
     public File generatePdf(String id) throws IOException, DocumentException {
         List<Stellenausschreibung> stelle = stellenausschreibungRepository.findAll();
         Context context = getContext(stelle.get(0));
@@ -79,8 +77,7 @@ public class PdfService {
     }
 
     private String loadAndFillTemplate(Context context) {
-        return templateEngine.process("mockup", context);
+        return templateEngine.process("template2", context);
     }
-
 
 }
