@@ -1,8 +1,13 @@
 package de.l.stadtwerke.loga3jobofferservice.service;
 
 import de.l.stadtwerke.loga3jobofferservice.model.FileDB;
+import de.l.stadtwerke.loga3jobofferservice.model.LogoImage;
+import de.l.stadtwerke.loga3jobofferservice.model.LogoState;
+import de.l.stadtwerke.loga3jobofferservice.model.TitleImage;
 import de.l.stadtwerke.loga3jobofferservice.repository.FileDBRepository;
+import de.l.stadtwerke.loga3jobofferservice.repository.LogoImageRepository;
 import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
+import de.l.stadtwerke.loga3jobofferservice.repository.TitleImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -28,6 +33,12 @@ public class FileStorageService {
     private FileDBRepository fileDBRepository;
 
     @Autowired
+    private LogoImageRepository logoImageRepository;
+
+    @Autowired
+    private TitleImageRepository titleImageRepository;
+
+    @Autowired
     private StellenausschreibungRepository stellenausschreibungRepository;
 
     public FileDB store(MultipartFile file, Long stellenangebotID) throws IOException {
@@ -41,8 +52,40 @@ public class FileStorageService {
         return fileDBRepository.save(FileDB);
     }
 
+    public void storeLogoFile
+            (MultipartFile file, String ident_Id) throws IOException {
+        if(!logoImageRepository.existsLogoImageByIdentId(ident_Id)){
+            LogoImage logoImage= new LogoImage();
+            logoImage.setName(file.getName());
+            logoImage.setLogoID(ident_Id);
+            logoImage.setData(file.getBytes());
+            logoImage.setType(file.getContentType());
+            logoImageRepository.save(logoImage);
+        }
+    }
+
+    public void storeTitleFile
+            (MultipartFile file, String ident_Id) throws IOException {
+        if(!titleImageRepository.existsTitleImageByTitleID(ident_Id)){
+            TitleImage titleImage= new TitleImage();
+            titleImage.setName(file.getName());
+            titleImage.setTitleID(ident_Id);
+            titleImage.setData(file.getBytes());
+            titleImage.setType(file.getContentType());
+            titleImageRepository.save(titleImage);
+        }
+    }
+
     public FileDB getFile(String id) {
         return fileDBRepository.findById(id).get();
+    }
+
+    public TitleImage getTitleImage(String id) {
+        return titleImageRepository.findByTitleID(id);
+    }
+
+    public LogoImage getLogoImage(String id) {
+        return logoImageRepository.findByLogoID(id);
     }
 
     public Stream<FileDB> getAllFiles() {

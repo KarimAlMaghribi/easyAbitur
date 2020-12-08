@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/template2.css"/>
   </head>
   <body>
-  <img class= "titlepic" src="images/titlepic.png"/>
+  <img class= "titlepic" th:src="|data:image/png;base64,${stelle.titlePicture}|" />
     <div class="grid-container">
         <div class="grid-item1">
             <div id="teamLeipziger">Ihr Job im #TeamLeipziger</div>
@@ -18,13 +18,12 @@
             <div class="grid-item2">
                 <h2 id="stellenBezeichnung"><span th:text="${stelle.title}"></span></h2>
                 <h3>Ihre Aufgaben</h3>
-                <div th:remove="tag" th:utext="${stelle.taskHTML}"></div>
+                <div th:remove="tag" th:utext="${stelle.ihreAufgaben}"></div>
                 <h3>Unser Angebot</h3>
-                <div th:remove="tag" th:utext="${stelle.offerHTML}"></div>
+                <div th:remove="tag" th:utext="${stelle.unserAngebot}"></div>
                 <h3>Ihr Profil</h3>
-                <ul>
-                    <div th:remove="tag" th:utext="${stelle.profileHTML}"></div>
-                </ul>
+                <div th:remove="tag" th:utext="${stelle.ihrProfil}"></div>
+
                 <div th:remove="tag" th:utext="${stelle.getAboutUsHTML()}"></div>
             </div>
             <div class="grid-item3">
@@ -33,11 +32,11 @@
             <div class="grid-item4">
                 <div id="bedingungen">
                     <h3>Gut zu wissen</h3>
-                    <div th:remove="tag" th:utext="${stelle.goodToKnowHTML}"></div>
+                    <div th:remove="tag" th:utext="${stelle.gutZuWissen}"></div>
                 </div>
                 <h3>Jetzt bewerben >></h3>
                 <p>
-                    <span th:text="${stelle.hrConsultant}"></span> <br/>
+                    <span th:text="${stelle.ansprechpartner}"></span> <br/>
                     HR Business Partner <br/>
                     karriere.stadtwerke@L.de
                 </p>
@@ -47,7 +46,7 @@
                     04006 Leipzig
                 </p>
                 <h4>Willkommen im #TeamLeipziger!</h4>
-                <img class= "logopic" src="images/logo1.png"/>
+                <img class= "logopic" th:src="|data:image/png;base64,${stelle.logoPicture}|" />
             </div>
 
         </div>

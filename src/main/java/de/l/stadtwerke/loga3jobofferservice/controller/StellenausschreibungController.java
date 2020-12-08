@@ -2,12 +2,13 @@ package de.l.stadtwerke.loga3jobofferservice.controller;
 
 import com.lowagie.text.DocumentException;
 import de.l.stadtwerke.loga3jobofferservice.model.FileDB;
+import de.l.stadtwerke.loga3jobofferservice.model.Mandant;
 import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung;
+import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung_old;
+import de.l.stadtwerke.loga3jobofferservice.repository.MandantRepository;
 import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
-import de.l.stadtwerke.loga3jobofferservice.service.DocxGeneratorService;
-import de.l.stadtwerke.loga3jobofferservice.service.FileStorageService;
-import de.l.stadtwerke.loga3jobofferservice.service.PdfService;
-import de.l.stadtwerke.loga3jobofferservice.service.XMLService;
+import de.l.stadtwerke.loga3jobofferservice.repository.Stellenausschreibung_oldRepository;
+import de.l.stadtwerke.loga3jobofferservice.service.*;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,7 +29,16 @@ public class StellenausschreibungController {
     StellenausschreibungRepository stellenausschreibungRepository;
 
     @Autowired
+    Stellenausschreibung_oldRepository stellenausschreibung_oldRepository;
+
+    @Autowired
+    MandantRepository mandantRepository;
+
+    @Autowired
     PdfService pdfService;
+
+    @Autowired
+    MandantService mandantService;
 
     @Autowired
     DocxGeneratorService docxGeneratorService;
@@ -39,6 +49,9 @@ public class StellenausschreibungController {
     @Autowired
     private XMLService xmlService;
 
+    @Autowired
+    private XMLService_old xmlService_old;
+
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/stellen")
     public List<Stellenausschreibung> getAllStellenausschreibungen() throws IOException, DocumentException {
@@ -46,17 +59,33 @@ public class StellenausschreibungController {
     }
 
     @CrossOrigin(origins = "http://localhost:4200")
-    @GetMapping("/stellen/xml")
-    public List<Stellenausschreibung> getAllXMLStellenausschreibungen() throws IOException, DocumentException {
-        List<Stellenausschreibung> stellenListe =  xmlService.parseJobs();
-        for ( Stellenausschreibung stelle: stellenListe){
-            this.pdfService.generatePdfandSave(stelle);
-        }
-        return stellenausschreibungRepository.findAll();
+    @GetMapping("/stellenOld")
+    public List<Stellenausschreibung_old> getAllOldStellenausschreibungen() throws IOException, DocumentException {
+        return stellenausschreibung_oldRepository.findAll();
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/stellen/xml/{id}")
+    public List<Stellenausschreibung> getAllXMLStellenausschreibungen(@PathVariable String id) throws IOException, DocumentException {
+        xmlService.parseJobsForMandant(id);
+
+        Mandant mandant = mandantService.getMandant(id);
+
+        return mandant.getStellenausschreibungList();
+    }
+
+  /*  @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/stellenOld/xml")
+    public List<Stellenausschreibung_old> getAllOLDXMLStellenausschreibungen() throws IOException, DocumentException {
+        List<Stellenausschreibung_old> stellenListe =  xmlService_old.parseJobs();
+        for ( Stellenausschreibung_old stelle: stellenListe){
+            this.pdfService.generatePdfandSave_old(stelle);
+        }
+        return stellenausschreibung_oldRepository.findAll();
+    }
+*/
     @GetMapping("/stellen/{id}")
-    public Stellenausschreibung getStellenausschreibungByID(@PathVariable Long id) throws NotFoundException {
+    public Stellenausschreibung getStellenausschreibungByID(@PathVariable String id) throws NotFoundException {
         Optional<Stellenausschreibung> optionalStellenausschreibung = stellenausschreibungRepository.findById(""+id);
         if(optionalStellenausschreibung.isPresent()) {
             return optionalStellenausschreibung.get();
@@ -74,11 +103,17 @@ public class StellenausschreibungController {
                 }).orElseThrow(() -> new NotFoundException(("Die Stellenausschreibung wurde nicht gefunden")));
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
-    @PostMapping("/stellen")
-    public Stellenausschreibung setStellenausschreibungen( @RequestBody(required=false)  Stellenausschreibung stelle) throws Exception {
-        return pdfService.generatePdfandSave(stelle);
+   /* @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/stellenOld")
+    public Stellenausschreibung_old setOldStellenausschreibungen( @RequestBody(required=false)  Stellenausschreibung_old stelle) throws Exception {
+        return pdfService.generatePdfandSave_old(stelle);
     }
+*/
+//    @CrossOrigin(origins = "http://localhost:4200")
+//    @PostMapping("/stellen")
+//    public Stellenausschreibung setStellenausschreibungen( @RequestBody(required=false)  Stellenausschreibung stelle) throws Exception {
+//        return pdfService.saveStelle(stelle);
+//    }
 
     @Transactional(readOnly=true)
     @CrossOrigin(origins = "http://localhost:4200")
@@ -89,6 +124,7 @@ public class StellenausschreibungController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
                 .body(fileDB.getData());
+
 
     }
 }

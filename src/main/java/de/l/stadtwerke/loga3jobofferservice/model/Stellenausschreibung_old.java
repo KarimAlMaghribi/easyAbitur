@@ -5,23 +5,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 
+@Table(name = "stellen_old")
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "stellen")
-public class Stellenausschreibung {
+public class Stellenausschreibung_old {
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinColumn (name = "mandant")
-    Mandant mandant;
 
     @Column(name = "stellenId", nullable = false)
     private String stellenId;
@@ -38,8 +35,8 @@ public class Stellenausschreibung {
     @Column(name = "url")
     private String url;
 
-    @Column(name = "mandantName")
-    private String mandantName;
+    @Column(name = "mandant")
+    private String mandant;
 
     @Column(name = "creationDate")
     private String creationDate;
@@ -59,9 +56,6 @@ public class Stellenausschreibung {
     @Column(name = "hrConsultant")
     private String hrConsultant;
 
-    @Column(name = "ansprechpartner")
-    private String ansprechpartner;
-
     @Column(name = "workTime")
     private String workTime;
 
@@ -71,29 +65,52 @@ public class Stellenausschreibung {
     @Column(name = "verguetung")
     private String verguetung;
 
-    @Column(name = "aboutUsHTML", length = 2048)
-    private String aboutUsHTML;
+    @Column(name = "content1")
+    private String content1;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = true, cascade=CascadeType.ALL)
+    @Column(name = "content2")
+    private String content2;
+
+    @Column(name = "content3")
+    private String content3;
+
+    @Column(name = "content4")
+    private String content4;
+
+    @Column(name = "content5")
+    private String content5;
+
+    @Column(name = "offer1")
+    private String offer1;
+
+    @Column(name = "offer2")
+    private String offer2;
+
+    @Column(name = "offer3")
+    private String offer3;
+
+    @Column(name = "offer4")
+    private String offer4;
+
+    @Column(name = "offer5")
+    private String offer5;
+
+    @Column(name = "selection1")
+    private String selection1;
+
+    @Column(name = "selection2")
+    private String selection2;
+
+    @Column(name = "selection3")
+    private String selection3;
+
+    @Column(name = "selection4")
+    private String selection4;
+
+    @Column(name = "selection5")
+    private String selection5;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = true, cascade= CascadeType.ALL)
     @JoinColumn(name = "files_id", nullable = true)
     private FileDB pdf;
-
-    @Column(name = "titlePicture", length =2000000)
-    private String titlePicture;
-
-    @Column(name = "logoPicture", length =2000000)
-    private String logoPicture;
-
-    @Column(name = "gutZuWissen", length = 2048)
-    private String gutZuWissen;
-
-    @Column(name = "ihreAufgaben", length = 2048)
-    private String ihreAufgaben;
-
-    @Column(name = "unserAngebot", length = 2048)
-    private String unserAngebot;
-
-    @Column(name = "ihrProfil", length = 2048)
-    private String ihrProfil;
-
 }

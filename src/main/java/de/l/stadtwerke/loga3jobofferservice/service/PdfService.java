@@ -3,8 +3,12 @@ package de.l.stadtwerke.loga3jobofferservice.service;
 import com.lowagie.text.DocumentException;
 import com.lowagie.text.pdf.BaseFont;
 import de.l.stadtwerke.loga3jobofferservice.model.FileDB;
+import de.l.stadtwerke.loga3jobofferservice.model.Mandant;
 import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung;
+import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung_old;
+import de.l.stadtwerke.loga3jobofferservice.repository.FileDBRepository;
 import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
+import de.l.stadtwerke.loga3jobofferservice.repository.Stellenausschreibung_oldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Example;
@@ -24,8 +28,16 @@ import java.util.Objects;
 public class PdfService {
 
     private static final String PDF_RESOURCES = "/static/";
+    @Autowired
     private StellenausschreibungRepository stellenausschreibungRepository;
+
+    @Autowired
+    private FileDBRepository fileDBRepository;
+
+    @Autowired
+    private Stellenausschreibung_oldRepository stellenausschreibung_oldRepository;
     private SpringTemplateEngine templateEngine;
+    @Autowired
     private XMLService xmlService;
 
     @Autowired
@@ -34,23 +46,47 @@ public class PdfService {
         this.templateEngine = templateEngine;
     }
 
-    public Stellenausschreibung generatePdfandSave(Stellenausschreibung stellenausschreibung) throws IOException, DocumentException {
-        boolean stelleExists = stellenausschreibungRepository.existsStellenausschreibungByStellenId( stellenausschreibung.getStellenId());
+
+   /* public Stellenausschreibung_old generatePdfandSave_old(Stellenausschreibung_old stellenausschreibung) throws IOException, DocumentException {
+        boolean stelleExists = stellenausschreibung_oldRepository.existsStellenausschreibungByStellenId( stellenausschreibung.getStellenId());
 
         if(!stelleExists){
-            Context context = getContext(stellenausschreibung);
+            Context context = getContext_old(stellenausschreibung);
             String html = loadAndFillTemplate(context);
             File file = renderPdf(html);
             MultipartFile multipartFile = new MockMultipartFile("stellenanzeige", new FileInputStream(file));
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
             FileDB fileDB = new FileDB(fileName, multipartFile.getContentType(), multipartFile.getBytes());
             stellenausschreibung.setPdf(fileDB);
-            stellenausschreibungRepository.save(stellenausschreibung);
+            stellenausschreibung_oldRepository.save(stellenausschreibung);
+        }
+        return stellenausschreibung;
+    }
+*/
+    public Stellenausschreibung generatePdf(Mandant mandant, Stellenausschreibung stellenausschreibung) throws IOException, DocumentException {
+        boolean stelleExists = stellenausschreibungRepository.existsStellenausschreibungByStellenId( stellenausschreibung.getStellenId());
+
+        if(!stelleExists){
+            stellenausschreibung.setLogoPicture(mandant.getLogoImage());
+            Context context = getContext(stellenausschreibung);
+            String html = loadAndFillTemplate(context);
+            File file = renderPdf(html);
+            MultipartFile multipartFile = new MockMultipartFile("stellenanzeige", new FileInputStream(file));
+            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+            FileDB fileDB = new FileDB(fileName, multipartFile.getContentType(), multipartFile.getBytes());
+            fileDBRepository.save(fileDB);
+            stellenausschreibung.setPdf(fileDB);
         }
         return stellenausschreibung;
     }
 
-    public File generatePdf(String id) throws IOException, DocumentException {
+    public Stellenausschreibung saveStelle(Mandant mandant, Stellenausschreibung stellenausschreibung) throws IOException, DocumentException {
+        Stellenausschreibung stelle = generatePdf(mandant, stellenausschreibung);
+        stellenausschreibungRepository.save(stelle);
+        return stelle;
+    }
+
+    public File generatePdfdepricated(String id) throws IOException, DocumentException {
         List<Stellenausschreibung> stelle = stellenausschreibungRepository.findAll();
         Context context = getContext(stelle.get(0));
         String html = loadAndFillTemplate(context);
@@ -70,12 +106,18 @@ public class PdfService {
         return file;
     }
 
-    private Context getContext(Stellenausschreibung stellenausschreibung) {
+    private Context getContext(Stellenausschreibung stelle) {
+        Context context = new Context();
+        context.setVariable("stelle", stelle);
+        return context;
+    }
+
+   /* private Context getContext_old(Stellenausschreibung_old stellenausschreibung) {
         Context context = new Context();
         context.setVariable("stelle", stellenausschreibung);
         return context;
     }
-
+*/
     private String loadAndFillTemplate(Context context) {
         return templateEngine.process("template2", context);
     }

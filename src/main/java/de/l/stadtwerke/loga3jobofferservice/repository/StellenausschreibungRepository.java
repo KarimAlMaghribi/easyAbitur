@@ -11,3 +11,4 @@ public interface StellenausschreibungRepository extends JpaRepository<Stellenaus
     //Stellenausschreibung findByFileDBid(String fileDBid);
     boolean existsStellenausschreibungByStellenId(String stellenId);
 }
+

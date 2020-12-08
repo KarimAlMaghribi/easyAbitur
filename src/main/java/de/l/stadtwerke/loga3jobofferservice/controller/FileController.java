@@ -3,6 +3,8 @@ package de.l.stadtwerke.loga3jobofferservice.controller;
 import de.l.stadtwerke.loga3jobofferservice.dto.response.ResponseFile;
 import de.l.stadtwerke.loga3jobofferservice.dto.response.ResponseFileMessage;
 import de.l.stadtwerke.loga3jobofferservice.model.FileDB;
+import de.l.stadtwerke.loga3jobofferservice.model.LogoImage;
+import de.l.stadtwerke.loga3jobofferservice.model.TitleImage;
 import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
 import de.l.stadtwerke.loga3jobofferservice.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +44,15 @@ public class FileController {
         }
     }
 */
+
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/files")
     public ResponseEntity<List<ResponseFile>> getListFiles() {
         List<ResponseFile> files = storageService.getAllFiles().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/files/")
-                    .path(dbFile.getId())
+                    .path(dbFile.getFiles_id())
                     .toUriString();
 
             return new ResponseFile(
@@ -61,9 +65,60 @@ public class FileController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable String id) {
         FileDB fileDB = storageService.getFile(id);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/logoImage/{id}")
+    public ResponseEntity<ResponseFileMessage> uploadLogoFile(@RequestParam("imageFile") MultipartFile file, @PathVariable String id) {
+        String message = "";
+        try {
+            storageService.storeLogoFile(file, id);
+            message = "Uploaded the image successfully: " + file.getOriginalFilename();
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseFileMessage(message));
+        } catch (Exception e) {
+            message = "Could not upload the image: " + file.getOriginalFilename() + "!";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseFileMessage(message));
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PostMapping("/titleImage/{id}")
+    public ResponseEntity<ResponseFileMessage> uploadTitleFile(@RequestParam("imageFile") MultipartFile file, @PathVariable String id) {
+        String message = "";
+        try {
+            storageService.storeTitleFile(file, id);
+            message = "Uploaded the image successfully: " + file.getOriginalFilename();
+            return ResponseEntity.status(HttpStatus.OK).body(new ResponseFileMessage(message));
+        } catch (Exception e) {
+            message = "Could not upload the image: " + file.getOriginalFilename() + "!";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseFileMessage(message));
+        }
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/titleImage/{id}")
+    public ResponseEntity<byte[]> getTitleImage(@PathVariable String id) {
+
+        TitleImage fileDB = storageService.getTitleImage(id);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
+                .body(fileDB.getData());
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/logoImage/{id}")
+    public ResponseEntity<byte[]> getLogoImage(@PathVariable String id) {
+
+        LogoImage fileDB = storageService.getLogoImage(id);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")

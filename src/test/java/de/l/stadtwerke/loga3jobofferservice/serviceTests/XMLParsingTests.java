@@ -11,6 +11,6 @@ public class XMLParsingTests {
 
     @Test
     public void testXML() {
-        xs.parseJobs();
+
     }
 }

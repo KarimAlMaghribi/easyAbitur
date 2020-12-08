@@ -1,6 +1,7 @@
 package de.l.stadtwerke.loga3jobofferservice.service;
 
-import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung;
+import de.l.stadtwerke.loga3jobofferservice.model.*;
+import de.l.stadtwerke.loga3jobofferservice.repository.MandantRepository;
 import de.l.stadtwerke.loga3jobofferservice.repository.StellenausschreibungRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.util.StringUtil;
@@ -15,21 +16,62 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class XMLService {
 
     @Autowired
-    private StellenausschreibungRepository stellenausschreibungRepository;
+    private MandantRepository mandantRepository;
 
-    public List<Stellenausschreibung> parseJobs() {
+    @Autowired
+    private FileStorageService fileStorageService;
 
+    @Autowired PdfService pdfService;
+
+    private static EMandant getMandant(String text) {
+        for (EMandant b : EMandant.values()) {
+            if (b.name().equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        return null;
+    }
+
+    private static String getURL(String id) {
+        String url = new String();
+        if(id == "Netz") {
+            url = "https://mitarbeiterportal.l.lecos.de/bewerber-web/?companyEid=NETZE&tenant=&lang=D#positions?company=NETZE-FIRMA-ID&tenant=&lang=D#position,id=b2c305d8-aca1-4cec-b04c-d783cffd8388,jobportalid=f162fa4f-1eeb-47f2-96a4-d78fe47323ca";
+        } else if (id == "LSW"){
+            url = "https://mitarbeiterportal.l.lecos.de/bewerber-web/public/JobPortalData?companyEid=LSW&jobPortal=HOMEPAGE/bewerber-web/?companyEid=LSW&lang=D?company=LSW-FIRMA-ID&tenant=&lang=D#position,id=7b5f181c-4877-406c-b8c8-cd529486fb66,jobportalid=f162fa4f-1eeb-47f2-96a4-d78fe47323ca";
+        }
+        return url;
+    }
+
+    private static File getXMLFile(String id) {
+        String xml_Path = new String();
+        if(id.equals("Netz")) {
+            xml_Path = "src/main/resources/logaTest_Netze.xml";
+        } else if (id.equals("LSW")){
+            xml_Path = "src/main/resources/logaTest_LSW.xml";
+        }
+        return new File(""+xml_Path);
+    }
+
+    public Mandant parseJobsForMandant(String id) {
+
+        Mandant mandant = new Mandant();
+        LogoImage logoImage = new LogoImage();
         List<Stellenausschreibung> stellenListe = new ArrayList();
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
-            File fXmlFile = new File("src/main/resources/logaTest.xml");
+
+            File fXmlFile = getXMLFile(id);
+
             Document doc = builder.parse(fXmlFile);
             //Document doc = builder.parse(URL);
 
@@ -54,6 +96,14 @@ public class XMLService {
                         stelle.setStellenId("");
                     }
 
+                    if (elem.getElementsByTagName("selection1") != null && elem.getElementsByTagName("selection1").item(0) != null) {
+                        stelle.setTitlePicture(
+                                Base64.getEncoder().encodeToString(fileStorageService.getTitleImage(elem.getElementsByTagName("selection1").item(0).getTextContent()).getData())
+                        );
+                    } else {
+                        stelle.setTitlePicture(null);
+                    }
+
                     if (elem.getElementsByTagName("referenceNumber") != null && elem.getElementsByTagName("referenceNumber").item(0) != null) {
                         stelle.setReferenceNumber(
                                 elem.getElementsByTagName("referenceNumber").item(0).getTextContent()
@@ -71,19 +121,21 @@ public class XMLService {
                     }
 
                     if (elem.getElementsByTagName("url") != null && elem.getElementsByTagName("url").item(0) != null) {
-                        stelle.setUrl(
-                                elem.getElementsByTagName("url").item(0).getTextContent()
-                        );
+                        stelle.setUrl(getURL(id));
                     } else {
                         stelle.setUrl("");
                     }
 
                     if (elem.getElementsByTagName("mandant") != null && elem.getElementsByTagName("mandant").item(0) != null) {
-                        stelle.setMandant(
-                                elem.getElementsByTagName("mandant").item(0).getTextContent()
-                        );
+                        String mandantName =  elem.getElementsByTagName("mandant").item(0).getTextContent();
+                        stelle.setMandantName( mandantName );
+
+                        logoImage = fileStorageService.getLogoImage(mandantName);
+                        mandant.setLogoImage(Base64.getEncoder().encodeToString(fileStorageService.getLogoImage(mandantName).getData()));
+                        mandant.setName(getMandant(mandantName));
+
                     } else {
-                        stelle.setMandant("");
+                        stelle.setMandantName("");
                     }
 
                     if (elem.getElementsByTagName("creationDate") != null && elem.getElementsByTagName("creationDate").item(0) != null) {
@@ -141,40 +193,73 @@ public class XMLService {
                         stelle.setHrConsultant("");
                     }
 
-                    if (elem.getElementsByTagName("content") != null && elem.getElementsByTagName("content").item(0) != null) {
-                        String content = elem.getElementsByTagName("content").item(0).getTextContent();
-
-                        String contentCopy = new String(content);
-                        stelle.setTaskHTML(
-                                StringUtils.substringBetween(contentCopy, "<p>Ihre Aufgaben</p>","<p><br></p> <p>Unser Angebot</p> ")
+                    if (elem.getElementsByTagName("text1") != null && elem.getElementsByTagName("text1").item(0) != null) {
+                        stelle.setAnsprechpartner(
+                                elem.getElementsByTagName("text1").item(0).getTextContent()
                         );
-
-                        stelle.setOfferHTML(
-                                StringUtils.substringBetween(contentCopy, "<p>Unser Angebot</p>","<p>Ihr Profil</p>")
-                        );
-
-                        stelle.setProfileHTML(
-                                StringUtils.substringBetween(contentCopy, "<p>Ihr Profil</p> <ul>","</ul>")
-                        );
-                        stelle.setAboutUsHTML(
-                                "<p>Leipzigs Energiezukunft liegt uns am Herzen. Deshalb gehen wir bewusst neue Wege, um die Energiewende aktiv mitzugestalten. Mit neuen Ideen, Expertenwissen und viel Engagement sorgen unsere rund 1.200 Mitarbeiterinnen und Mitarbeiter dafür, dass Leipzig die Energie nicht ausgeht – heute nicht und auch nicht in Zukunft. Geben auch Sie Leipzig Energie.</p>"
-                        );
-                        stelle.setGoodToKnowHTML(
-                                StringUtils.substringBetween(contentCopy, "<p>Gut zu wissen</p>","<p><br></p> <p>Ihre Aufgaben</p> ")
-                        );
-
                     } else {
+                        stelle.setAnsprechpartner("");
                     }
 
+                    if (elem.getElementsByTagName("longtext1") != null && elem.getElementsByTagName("longtext1").item(0) != null) {
+                        String rawText = elem.getElementsByTagName("longtext1").item(0).getTextContent();
+                        String parsedText = parseText(rawText);
+                        stelle.setGutZuWissen(parsedText);
+                    } else {
+                        stelle.setGutZuWissen("");
+                    }
+
+                    if (elem.getElementsByTagName("longtext2") != null && elem.getElementsByTagName("longtext2").item(0) != null) {
+                        String rawText = elem.getElementsByTagName("longtext2").item(0).getTextContent();
+                        String parsedText = parseText(rawText);
+                        stelle.setIhreAufgaben(parsedText);
+                    } else {
+                        stelle.setIhreAufgaben("");
+                    }
+
+                    if (elem.getElementsByTagName("longtext3") != null && elem.getElementsByTagName("longtext3").item(0) != null) {
+                        String rawText = elem.getElementsByTagName("longtext3").item(0).getTextContent();
+                        String parsedText = parseText(rawText);
+                        stelle.setUnserAngebot(parsedText);
+                    } else {
+                        stelle.setUnserAngebot("");
+                    }
+
+                    if (elem.getElementsByTagName("longtext4") != null && elem.getElementsByTagName("longtext4").item(0) != null) {
+                        String rawText = elem.getElementsByTagName("longtext4").item(0).getTextContent();
+                        String parsedText = parseText(rawText);
+                        stelle.setIhrProfil(parsedText);
+                    } else {
+                        stelle.setIhrProfil("");
+                    }
+                    stelle.setAboutUsHTML(
+                            "<p>Leipzigs Energiezukunft liegt uns am Herzen. Deshalb gehen wir bewusst neue Wege, um die Energiewende aktiv mitzugestalten. Mit neuen Ideen, Expertenwissen und viel Engagement sorgen unsere rund 1.200 Mitarbeiterinnen und Mitarbeiter dafür, dass Leipzig die Energie nicht ausgeht – heute nicht und auch nicht in Zukunft. Geben auch Sie Leipzig Energie.</p>"
+                    );
+                    pdfService.generatePdf(mandant, stelle);
                     stellenListe.add(stelle);
                 }
-
+                mandant.setStellenausschreibungList(stellenListe);
             }
 
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        return stellenListe;
+
+        mandantRepository.save(mandant);
+        return mandant;
+    }
+
+    private String parseText(String rawText) {
+        String[] bulletPoints = rawText.split("#");
+        List<String> htmlBulletPoints = new ArrayList();
+        for (String bulletPoint : bulletPoints) {
+            if(!bulletPoint.equals("")){
+                bulletPoint = "<li>" + bulletPoint.trim() + "</li>";
+                htmlBulletPoints.add(bulletPoint);
+            }
+        }
+        String parsedText = "<ul>" + String.join("", htmlBulletPoints) + "</ul>";
+        return parsedText;
     }
 
 }

@@ -33,6 +33,6 @@ public class HelloWorldController {
 
     @GetMapping("/xmltest")
     public void testXML() throws NotFoundException {
-        xs.parseJobs();
+
     }
 }
