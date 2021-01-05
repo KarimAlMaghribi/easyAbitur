@@ -30,6 +30,9 @@ public class XMLService {
     @Autowired
     private FileStorageService fileStorageService;
 
+    @Autowired
+    private StellenausschreibungRepository stellenausschreibungRepository;
+
     @Autowired PdfService pdfService;
 
     private static EMandant getMandant(String text) {
@@ -121,7 +124,7 @@ public class XMLService {
                     }
 
                     if (elem.getElementsByTagName("url") != null && elem.getElementsByTagName("url").item(0) != null) {
-                        stelle.setUrl(getURL(id));
+                        stelle.setUrl(elem.getElementsByTagName("url").item(0).getTextContent());
                     } else {
                         stelle.setUrl("");
                     }
@@ -235,8 +238,13 @@ public class XMLService {
                     stelle.setAboutUsHTML(
                             "<p>Leipzigs Energiezukunft liegt uns am Herzen. Deshalb gehen wir bewusst neue Wege, um die Energiewende aktiv mitzugestalten. Mit neuen Ideen, Expertenwissen und viel Engagement sorgen unsere rund 1.200 Mitarbeiterinnen und Mitarbeiter dafür, dass Leipzig die Energie nicht ausgeht – heute nicht und auch nicht in Zukunft. Geben auch Sie Leipzig Energie.</p>"
                     );
-                    pdfService.generatePdf(mandant, stelle);
-                    stellenListe.add(stelle);
+                    boolean stelleExists = stellenausschreibungRepository.existsStellenausschreibungByStellenId( stelle.getStellenId());
+
+                    if(!stelleExists) {
+                        Stellenausschreibung stellenausschreibung = pdfService.generatePdf(mandant, stelle);
+                        stellenListe.add(stellenausschreibung);
+
+                    }
                 }
                 mandant.setStellenausschreibungList(stellenListe);
             }

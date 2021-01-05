@@ -40,6 +40,11 @@ body{
     "fooderLeft footerRight";
   }
 
+a:link {
+    color: #032c58;
+    background-color: transparent;
+    text-decoration: none;
+}
   .grid-item1 {
     grid-area: header;
     text-align: right;
@@ -57,17 +62,31 @@ body{
     width: 12cm;
   }
 
+    .h3 {
+        display: block;
+        font-size: 1.17em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: 0;
+        margin-right: 0;
+        font-weight: bold;
+    }
   .grid-item3 {
-    grid-area: fooderLeft;
-    text-align: left;
-    padding-left: 1.5cm;
-    padding-top: 3cm;
+        grid-area: fooderLeft;
+        text-align: left;
+        padding-left: 1.5cm;
+        padding-top: 3cm;
+        font-size: 2.17em;
+  }
+
+  .karriereLink {
+      font-size: 1.17em;
   }
 
   .logopic {
       position: absolute;
-      width: 5cm;
-      height: auto;
+      width: auto;
+      height: 1.5cm;
       top:17cm;
       right: 0.5cm;
   }

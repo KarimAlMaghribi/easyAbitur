@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +46,6 @@ public class FileController {
         }
     }
 */
-
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/files")
     public ResponseEntity<List<ResponseFile>> getListFiles() {
@@ -75,6 +76,45 @@ public class FileController {
                 .body(fileDB.getData());
     }
 
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/titleImage/objall")
+    public ResponseEntity<List<TitleImage>> getAllTitleObjImages() {
+
+        List<TitleImage> fileDB = storageService.getAllTitleImages();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION)
+                .body(fileDB);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/logoImage/objall")
+    public ResponseEntity<List<LogoImage>> getAllLogoImages() {
+
+        List<LogoImage> fileDB = storageService.getAllLogoImages();
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION)
+                .body(fileDB);
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/titleImage/all")
+    public ResponseEntity<ArrayList<byte[]>> getAllTitleImages() {
+
+        List<TitleImage> fileDB = storageService.getAllTitleImages();
+
+        ArrayList<byte[]> pictureData = new ArrayList<>();
+
+        for(TitleImage image: fileDB) {
+            pictureData.add(image.getData());
+        }
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION)
+                .body(pictureData);
+    }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/logoImage/{id}")
     public ResponseEntity<ResponseFileMessage> uploadLogoFile(@RequestParam("imageFile") MultipartFile file, @PathVariable String id) {
@@ -103,7 +143,7 @@ public class FileController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:4200")
+   @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/titleImage/{id}")
     public ResponseEntity<byte[]> getTitleImage(@PathVariable String id) {
 
@@ -114,6 +154,32 @@ public class FileController {
                 .body(fileDB.getData());
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping("/delete/titleImage/{id}")
+    public void deleteTitleImage(@PathVariable String id) {
+
+        storageService.deleteTitleImage(id);
+
+    }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @DeleteMapping("/delete/logoImage/{id}")
+    public void deleteLogoImage(@PathVariable String id) {
+        storageService.deleteLogoImage(id);
+    }
+    /*
+       @CrossOrigin(origins = "http://localhost:4200")
+       @GetMapping("/titleImage/{id}")
+       public ResponseEntity<ArrayList<TitleImage>> getTitleImage(@PathVariable String id) {
+
+           ArrayList<TitleImage> fileDB = new ArrayList<>();
+           fileDB.add(storageService.getTitleImage(id));
+
+           return ResponseEntity.ok()
+                   .header(HttpHeaders.CONTENT_DISPOSITION)
+                   .body(fileDB);
+       }
+    */
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/logoImage/{id}")
     public ResponseEntity<byte[]> getLogoImage(@PathVariable String id) {

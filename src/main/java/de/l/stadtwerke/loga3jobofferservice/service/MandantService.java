@@ -13,7 +13,7 @@ public class MandantService {
     public Mandant getMandant(String mandant) {
         Mandant newMandant = new Mandant();
 
-        if (mandant == "LSW") {
+        if (mandant.equals("LSW")) {
             newMandant = mandantRepository.find_LSW_Mandant();
         } else if (mandant.equals("Netz")) {
             newMandant = mandantRepository.find_Netz_Mandant();

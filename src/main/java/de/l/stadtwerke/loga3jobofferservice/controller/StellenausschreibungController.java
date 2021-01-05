@@ -67,6 +67,7 @@ public class StellenausschreibungController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/stellen/xml/{id}")
     public List<Stellenausschreibung> getAllXMLStellenausschreibungen(@PathVariable String id) throws IOException, DocumentException {
+
         xmlService.parseJobsForMandant(id);
 
         Mandant mandant = mandantService.getMandant(id);

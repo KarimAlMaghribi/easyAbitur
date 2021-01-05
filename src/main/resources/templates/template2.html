@@ -34,11 +34,12 @@
                     <h3>Gut zu wissen</h3>
                     <div th:remove="tag" th:utext="${stelle.gutZuWissen}"></div>
                 </div>
-                <h3>Jetzt bewerben >></h3>
+                <a class="h3" href="details.html"
+                   th:href="@{${stelle.url}}">Jetzt bewerben >></a>
                 <p>
                     <span th:text="${stelle.ansprechpartner}"></span> <br/>
-                    HR Business Partner <br/>
-                    karriere.stadtwerke@L.de
+
+                    <span class ="karriereLink"> karriere.stadtwerke@L.de </span>>
                 </p>
                 <p>
                     Stadtwerke Leipzig GmbH <br/>
