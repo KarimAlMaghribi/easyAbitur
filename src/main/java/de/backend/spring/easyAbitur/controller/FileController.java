@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,22 +81,10 @@ public class FileController {
   @CrossOrigin(origins = "http://localhost:4200")
   //@PostMapping("/titleImage/{id}")
   @RequestMapping(value = "/upload/mathGK", method = RequestMethod.POST)
-  public ResponseEntity<ResponseFileMessage> upload_MathGK_Exam_File(@RequestParam("imageFile") MultipartFile file, @RequestParam("title") String title, @RequestParam("year") int year) {
-    String message = "";
-    try {
-      if (storageService.storeMathGK_Exam(file, title, year)) {
-        message = "Uploaded the image successfully: " + title;
-        System.err.println(message);
-        return ResponseEntity.status(HttpStatus.OK).body(new ResponseFileMessage(message));
-      } else {
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ResponseFileMessage("Eine Datei mit diesem Namen existiert bereits"));
-      }
+  public void upload_MathGK_Exam_File(@RequestParam("imageFile") MultipartFile file, @RequestParam("title") String title, @RequestParam("year") int year) throws IOException {
 
-    } catch (Exception e) {
-      message = "Could not upload the image: " + title + " !";
-      System.err.println(message);
-      return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseFileMessage(message));
-    }
+    storageService.storeMathGK_Exam(file, title, year);
+
   }
 
 

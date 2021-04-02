@@ -8,10 +8,10 @@
 		<version>2.3.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>de.l.stadtwerke</groupId>
-	<artifactId>loga3-joboffer-service</artifactId>
+	<groupId>de.development</groupId>
+	<artifactId>easyAbitur-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>loga3-joboffer-service</name>
+	<name>easyAbitur-service</name>
 	<description>Retrieve XML Data and transform it into a PDF</description>
 
 	<properties>

@@ -1,6 +1,6 @@
 package de.l.stadtwerke.loga3jobofferservice.controllerTests;
 
-import de.backend.spring.easyAbitur.Loga3JobofferServiceApplication;
+import de.backend.spring.easyAbitur.EasyAbiturServiceApplication;
 import de.backend.spring.easyAbitur.model.Employee;
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.HttpClientErrorException;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Loga3JobofferServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = EasyAbiturServiceApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class EmployeeControllerIntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;

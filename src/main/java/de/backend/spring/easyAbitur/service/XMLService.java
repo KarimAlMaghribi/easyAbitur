@@ -4,7 +4,6 @@ import de.backend.spring.easyAbitur.model.EMandant;
 import de.backend.spring.easyAbitur.model.LogoImage;
 import de.backend.spring.easyAbitur.model.Mandant;
 import de.backend.spring.easyAbitur.model.Stellenausschreibung;
-import de.l.stadtwerke.loga3jobofferservice.model.*;
 import de.backend.spring.easyAbitur.repository.MandantRepository;
 import de.backend.spring.easyAbitur.repository.StellenausschreibungRepository;
 import org.springframework.beans.factory.annotation.Autowired;
