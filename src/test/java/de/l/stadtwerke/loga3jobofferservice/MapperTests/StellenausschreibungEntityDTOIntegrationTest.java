@@ -1,8 +1,8 @@
 package de.l.stadtwerke.loga3jobofferservice.MapperTests;
 
-import de.l.stadtwerke.loga3jobofferservice.dto.model.StellenausschreibungDTO;
-import de.l.stadtwerke.loga3jobofferservice.dto.mapper.StellenausschreibungMapper;
-import de.l.stadtwerke.loga3jobofferservice.model.Stellenausschreibung;
+import de.backend.spring.easyAbitur.dto.model.StellenausschreibungDTO;
+import de.backend.spring.easyAbitur.dto.mapper.StellenausschreibungMapper;
+import de.backend.spring.easyAbitur.model.Stellenausschreibung;
 import org.junit.Test;
 import org.mapstruct.factory.Mappers;
 

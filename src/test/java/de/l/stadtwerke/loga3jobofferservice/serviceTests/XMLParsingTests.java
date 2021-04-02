@@ -1,7 +1,6 @@
 package de.l.stadtwerke.loga3jobofferservice.serviceTests;
 
-import de.l.stadtwerke.loga3jobofferservice.service.XMLService;
-import javassist.NotFoundException;
+import de.backend.spring.easyAbitur.service.XMLService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,7 +1,7 @@
 package de.l.stadtwerke.loga3jobofferservice.controllerTests;
 
-import de.l.stadtwerke.loga3jobofferservice.Loga3JobofferServiceApplication;
-import de.l.stadtwerke.loga3jobofferservice.model.Employee;
+import de.backend.spring.easyAbitur.Loga3JobofferServiceApplication;
+import de.backend.spring.easyAbitur.model.Employee;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
