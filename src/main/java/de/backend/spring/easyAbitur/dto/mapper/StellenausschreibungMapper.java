@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface StellenausschreibungMapper {
-    Stellenausschreibung mapToStellenausschreibung(StellenausschreibungDTO stellenausschreibungDTO);
+    Stellenausschreibung mappToStellenausschreibung(StellenausschreibungDTO stellenausschreibungDTO);
     StellenausschreibungDTO mapStellenausschreibungToDTO(Stellenausschreibung stellenausschreibung);
 }
